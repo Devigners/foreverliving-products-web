@@ -1,3 +1,7 @@
+@php
+    $countries = $viewData['countries'];
+@endphp
+
 <div class="top-bar">
 	<div class="container">
 		<div class="d-flex justify-content-between">
@@ -7,26 +11,13 @@
 						<div class="select-box">
 							<div class="show-value"></div>
 							<div class="select-dropdown">
-								<div class="select-item" value="unitedstates">
-									<img src="{{ asset('images/countries/usa.jpg') }}"
-										alt="usa-flag-icon" />
-									USA
-								</div>
-								<div class="select-item" value="greatbritain">
-									<img src="{{ asset('images/countries/english.png') }}"
-										alt="english-flag-icon" />
-									UK
-								</div>
-								<div class="select-item" value="australia">
-									<img src="{{ asset('images/countries/Australia.jpg') }}"
-										alt="australia-flag-icon" />
-									AUS
-								</div>
-								<div class="select-item" value="canada">
-									<img src="{{ asset('images/countries/canada.jpg') }}"
-										alt="canada-flag-icon" />
-									CAN
-								</div>
+                                @foreach ($countries as $country)
+                                    <div class="select-item" value="unitedstates">
+                                        <img src="{{ asset('images/countries/usa.jpg') }}"
+                                            alt="usa-flag-icon" />
+                                        {{ $country->name }}
+                                    </div>
+                                @endforeach
 							</div>
 						</div>
 					</div>

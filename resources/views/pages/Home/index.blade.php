@@ -39,7 +39,6 @@
 				</div>
 				<div class="col-xl-8 col-lg-6">
 					<div class="about-content content-right">
-						{% if(pageType == 'index') %}
 						<p>
 							Forever Living Products is quickly becoming an international sensation. With its diverse
 							range of natural products, the company has been able to establish a presence in different
