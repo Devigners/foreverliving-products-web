@@ -1,0 +1,48 @@
+<div class="top-bar">
+	<div class="container">
+		<div class="d-flex justify-content-between">
+			<div class="header-top-dropdown">
+				<div class="top-header-points">
+					<div class="h-select-group d-flex align-items-center">
+						<div class="select-box">
+							<div class="show-value"></div>
+							<div class="select-dropdown">
+								<div class="select-item" value="unitedstates">
+									<img src="{{ asset('images/countries/usa.jpg') }}"
+										alt="usa-flag-icon" />
+									USA
+								</div>
+								<div class="select-item" value="greatbritain">
+									<img src="{{ asset('images/countries/english.png') }}"
+										alt="english-flag-icon" />
+									UK
+								</div>
+								<div class="select-item" value="australia">
+									<img src="{{ asset('images/countries/Australia.jpg') }}"
+										alt="australia-flag-icon" />
+									AUS
+								</div>
+								<div class="select-item" value="canada">
+									<img src="{{ asset('images/countries/canada.jpg') }}"
+										alt="canada-flag-icon" />
+									CAN
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="top-header-points">
+					<div class="d-flex align-items-center">
+						<i class="far fa-search"></i> &nbsp;&nbsp;
+						<input id="search-area" placeholder="Search your area..." />
+					</div>
+				</div>
+			</div>
+			<div class="top-header-points google-language">
+				<div class="h-select-group">
+					<div id="google_translate_element"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

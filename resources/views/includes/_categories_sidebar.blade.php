@@ -1,0 +1,14 @@
+<nav class="department-nav-menu">
+    <button class="sidebar-close">
+        <i class="fas fa-times"></i>
+    </button>
+    <ul class="nav-menu-list">
+        {{-- <!-- {% for category in categories %}
+        <li>
+            <a href="#" class="nav-link">
+                <span class="menu-text">{{ category }}</span>
+            </a>
+        </li>
+        {% endfor %} --> --}}
+    </ul>
+</nav>

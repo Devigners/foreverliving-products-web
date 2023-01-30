@@ -1,0 +1,189 @@
+@extends('layouts.index')
+@section('content')
+    <main class="main-wrapper">
+        <!-- Start Slider Area -->
+        <div class="axil-main-slider-area main-slider-style-2">
+            <div class="container">
+                <div class="d-flex w-100">
+                    <div class="department-menu-col">
+                        @include('includes._categories_sidebar')
+                    </div>
+                    <div class="banner-area">
+                        <div class="slider-offset-left">
+                            <div class="row row--20">
+                                <div class="col-lg-9">
+                                    <div class="slider-box-wrap">
+                                        <div class="slider-activation-one axil-slick-dots">
+                                            <div class="single-slide slick-slide">
+                                                <div class="main-slider-content">
+                                                    <span class="subtitle">Phone</span>
+                                                    <h2 class="title">Iphone</h2>
+                                                    <div class="shop-btn">
+                                                        <a href="" class="axil-btn">Shop Now <i
+                                                                class="fal fa-long-arrow-right"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="main-slider-thumb">
+                                                    <img src="https://via.placeholder.com/600x600" alt="Slider Images">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="slider-product-box single-product-box" style="height: 100%">
+                                        <div class="product-thumb">
+                                            <a href="#">
+                                                <img src="https://via.placeholder.com/200x200" alt="Product Images">
+                                            </a>
+                                        </div>
+                                        <span class="price">$ 120</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-xl-3 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 row--20">
+                            <div class="col mb-3">
+                                <div class="home-service-box" data-color="green">
+                                    <div class="inner">
+                                        <h5>Hurry!</h5>
+                                        <h5>Free Shipping</h5>
+                                        <h6>on US orders of 50$ or more</h6>
+                                        <img src="{{ asset('images/icons/drop-shipping.png') }}" alt="free-shipping-icon"
+                                            class="mt-4" />
+                                    </div>
+                                    <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
+                                        *This offer is subject to change anytime
+                                    </p>
+                                    <a class="btn" role="button" href="">
+                                        Get Now
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col mb-3 campaign-data">
+                                <div class="home-service-box" data-color="light-blue">
+                                    <div class="inner">
+                                        <h5>Limited 12% Off</h5>
+                                        <h6>No Joining Needed</h6>
+                                        <ul class="timer-box">
+                                            <li><span data-date="days">0</span>d</li>
+                                            <li><span data-date="hours">0</span>h</li>
+                                            <li><span data-date="minutes">0</span>m</li>
+                                            <li><span data-date="seconds">0</span>s</li>
+                                        </ul>
+                                    </div>
+                                    <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
+                                        *This offer is subject to change anytime
+                                    </p>
+                                    <a class="btn" role="button" href="">
+                                        Click Now
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="home-service-box" data-color="purple">
+                                    <div class="inner">
+                                        <h5>Preferred Customer</h5>
+                                        <h5>Gets 5% Off</h5>
+                                        <h6>Instantly & Forever</h6>
+                                    </div>
+                                    <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
+                                        *This offer is subject to change anytime
+                                    </p>
+                                    <a class="btn" role="button"
+                                        href="">
+                                        Join FLP Family
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="home-service-box" data-color="green">
+                                    <div class="inner">
+                                        <h5>Visit Our<br />Online Store</h5>
+                                        <h6>for United States</h6>
+                                    </div>
+                                    <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
+                                        *This offer is subject to change anytime
+                                    </p>
+                                    <a class="btn" role="button" href="">
+                                        Check it Out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Slider Area -->
+        <div class="axil-product-area bg-color-white axil-section-gap">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="title-highlighter highlighter-primary">
+                        <i class="far fa-shopping-basket"></i> Our Products</span>
+                    <h2 class="title">Explore Our Products</h2>
+                </div>
+                <div class="row row--15" id="product-lists">
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="axil-product product-style-one has-color-pick mt--40">
+                            <div class="thumbnail">
+                                <a href="">
+                                    <img src="https://via.placeholder.com/600x600" alt="Product Images">
+                                </a>
+                                <div class="product-hover-action">
+                                    <ul class="cart-action">
+                                        <li class="select-option">
+                                            <a href="" target="_blank">Buy Now</a>
+                                        </li>
+                                        <li class="select-option">
+                                            <a class="btn-default" href="">See Details</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="inner text-center">
+                                    <h5 class="title">
+                                        <a href="">Iphone 12 Pro Max</a>
+                                    </h5>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">$ 320</span>
+                                    </div>
+                                    <h6 class="description my-1">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, dolore, omnis
+                                        quisquam obcaecati fuga maxime et nemo illum.</h6>
+                                    <p style="font-size: 9px; opacity: 0.7">
+                                        *Price & Stock are subject to change anytime
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End Expolre Product Area  -->
+
+        <!-- Start Axil Newsletter Area  -->
+        <div class="axil-newsletter-area axil-section-gap pt--0">
+            <div class="container">
+                <div class="etrade-newsletter-wrapper bg_image bg_image--12">
+                    <div class="newsletter-content">
+                        <span class="title-highlighter highlighter-primary2"><i
+                                class="fas fa-envelope-open"></i>Newsletter</span>
+                        <h2 class="title mb--40 mb_sm--30 text-white">Get weekly update</h2>
+                        <div class="input-group newsletter-form">
+                            <div class="position-relative newsletter-inner mb--15">
+                                <input placeholder="example@gmail.com" type="text" />
+                            </div>
+                            <button type="submit" class="axil-btn mb--15">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End Axil Newsletter Area  -->
+    </main>
+@endsection
