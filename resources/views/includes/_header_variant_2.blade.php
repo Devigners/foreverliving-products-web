@@ -1,7 +1,4 @@
 @include('includes._head_assets')
-@php
-    $validUnit = $viewData['validUntil'];
-@endphp
 <div class="page-loader">
     <div class="lds-ellipsis">
         <div></div>
@@ -19,7 +16,7 @@
 <![endif]-->
 <!-- Start Header -->
 <header class="header axil-header header-style-2">
-    <div class="timer-box-date" data-time="{{ $validUnit }}"></div>
+    <div class="timer-box-date" data-time=""></div>
     <div class="header-top-campaign campaign-data">
         <div class="container position-relative">
             <div class="campaign-content">

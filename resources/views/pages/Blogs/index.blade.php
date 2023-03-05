@@ -34,8 +34,8 @@
                                             <div class="thumbnail">
                                                 <a
                                                     href="{{ route('page-blogs-detail', ['country' => 'unitedStates', 'id' => $blog->id]) }}">
-                                                    <img src="{{ env('API_IMAGE_URL') . $blog->image->c_img }}"
-                                                        alt="Blog Images" />
+                                                    <img src="{{ env('API_GET_IMAGE') . $blog->image->id }}/400/400"
+                                                        alt="Blog Images" loading="lazy" />
                                                 </a>
                                                 <div class="blog-category">
                                                     <a href="#">{{ $blog->categories[0] }}</a>

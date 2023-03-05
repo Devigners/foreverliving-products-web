@@ -6,6 +6,7 @@ use App\Models\Countries;
 use App\Models\OfferCards;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,14 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         $viewData = [
             'countries' => $countries,
-            'validUntil' => '',
         ];
-
-        $validUntil = OfferCards::where('type', 'discount-cards')->first();
-
-        if($validUntil && $validUntil->valid_until) {
-            $viewData['validUntil'] = Carbon::parse($validUntil->valid_until)->format('Y-m-d');
-        }
 
         View::share('viewData', $viewData);
     }
