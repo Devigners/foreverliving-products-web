@@ -1,5 +1,4 @@
 @include('includes._head_assets')
-
 <div class="page-loader">
     <div class="lds-ellipsis">
         <div></div>
