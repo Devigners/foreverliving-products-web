@@ -12,21 +12,24 @@
                         <div class="slider-offset-left">
                             <div class="row row--20">
                                 <div class="col-lg-9">
-                                    <div class="slider-box-wrap">
+                                    <div class="slider-box-wrap" id="dyn_prod">
                                         <div class="slider-activation-one axil-slick-dots">
-                                            <div class="single-slide slick-slide">
-                                                <div class="main-slider-content">
-                                                    <span class="subtitle">Phone</span>
-                                                    <h2 class="title">Iphone</h2>
-                                                    <div class="shop-btn">
-                                                        <a href="" class="axil-btn">Shop Now <i
-                                                                class="fal fa-long-arrow-right"></i></a>
+                                            @foreach ($firstthreeproducts as $item)
+                                                <div class="single-slide slick-slide">
+                                                    <div class="main-slider-content">
+                                                        <span class="subtitle">{{ $item->category }}
+                                                        </span>
+                                                        <h2 class="title">{{ $item->title }}</h2>
+                                                        <div class="shop-btn">
+                                                            <a href="{{ $item->affiliate_link }}" class="axil-btn">Shop Now
+                                                                <i class="fal fa-long-arrow-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="main-slider-thumb">
+                                                        <img src="{{ $item->image_link }}" alt="Slider Images">
                                                     </div>
                                                 </div>
-                                                <div class="main-slider-thumb">
-                                                    <img src="https://via.placeholder.com/600x600" alt="Slider Images">
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -90,8 +93,7 @@
                                     <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
                                         *This offer is subject to change anytime
                                     </p>
-                                    <a class="btn" role="button"
-                                        href="">
+                                    <a class="btn" role="button" href="">
                                         Join FLP Family
                                     </a>
                                 </div>
@@ -124,41 +126,47 @@
                     <h2 class="title">Explore Our Products</h2>
                 </div>
                 <div class="row row--15" id="product-lists">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="axil-product product-style-one has-color-pick mt--40">
-                            <div class="thumbnail">
-                                <a href="">
-                                    <img src="https://via.placeholder.com/600x600" alt="Product Images">
-                                </a>
-                                <div class="product-hover-action">
-                                    <ul class="cart-action">
-                                        <li class="select-option">
-                                            <a href="" target="_blank">Buy Now</a>
-                                        </li>
-                                        <li class="select-option">
-                                            <a class="btn-default" href="">See Details</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="inner text-center">
-                                    <h5 class="title">
-                                        <a href="">Iphone 12 Pro Max</a>
-                                    </h5>
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">$ 320</span>
+                    @foreach ($products as $item)
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="axil-product product-style-one has-color-pick mt--40">
+                                <div class="thumbnail">
+                                    <a
+                                        href="{{ route('product', ['country' => Session::get('country'), 'category' => str_replace(' ', '-', $item->singlecategory), 'name' => $item->slug]) }}">
+                                        <img src="{{ $item->image_link }}" alt="{{ $item->title }}">
+                                    </a>
+                                    <div class="product-hover-action">
+                                        <ul class="cart-action">
+                                            <li class="select-option">
+                                                <a href="{{ $item->affiliate_link }}" target="_blank">Buy Now</a>
+                                            </li>
+                                            <li class="select-option">
+                                                <a class="btn-default" href="">See Details</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <h6 class="description my-1">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, dolore, omnis
-                                        quisquam obcaecati fuga maxime et nemo illum.</h6>
-                                    <p style="font-size: 9px; opacity: 0.7">
-                                        *Price & Stock are subject to change anytime
-                                    </p>
+                                </div>
+                                <div class="product-content">
+                                    <div class="inner text-center">
+                                        <h5 class="title">
+                                            <a href="">{{ $item->title }}</a>
+                                        </h5>
+                                        <div class="product-price-variant">
+                                            <span class="price current-price">
+                                                {{ $item->price }}
+                                            </span>
+                                        </div>
+                                        <h6 class="description my-1">
+                                            {{ $item->short_description }}
+                                        </h6>
+                                        <p style="font-size: 9px; opacity: 0.7">
+                                            *Price & Stock are subject to change anytime
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
             <!-- End .container -->

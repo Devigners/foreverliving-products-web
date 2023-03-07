@@ -134,6 +134,28 @@
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
 
+
+<script>
+    // load the products for the category //
+    $(document).on('click', '[data-href="load_prod"]', function(e) {
+        e.preventDefault();
+        var category = $(this).attr('data-category');
+
+        var url = "{{ route('page-shop', 'unitedstates') }}";
+        $.ajax({
+            url: url + '/' + category,
+            type: 'GET',
+            success: function(data) {
+                $('#dyn_prod').html('');
+                $('#dyn_prod').html(data);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+
 <script>
     $(function() {
         $('.page-loader').fadeOut('fast');
@@ -180,20 +202,20 @@
         },
     });
 
-    var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-    (function() {
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/6391384adaff0e1306db746e/1gjnk7omv';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-        window.Tawk_API.customStyle = {
-            zIndex: 1
-        };
-    })();
+    // var Tawk_API = Tawk_API || {},
+    //     Tawk_LoadStart = new Date();
+    // (function() {
+    //     var s1 = document.createElement("script"),
+    //         s0 = document.getElementsByTagName("script")[0];
+    //     s1.async = true;
+    //     s1.src = 'https://embed.tawk.to/6391384adaff0e1306db746e/1gjnk7omv';
+    //     s1.charset = 'UTF-8';
+    //     s1.setAttribute('crossorigin', '*');
+    //     s0.parentNode.insertBefore(s1, s0);
+    //     window.Tawk_API.customStyle = {
+    //         zIndex: 1
+    //     };
+    // })();
 
     // on click .select-box
     $("body").on("click", ".select-box .show-value", function(e) {

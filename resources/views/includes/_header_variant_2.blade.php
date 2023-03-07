@@ -1,7 +1,5 @@
 @include('includes._head_assets')
-@php
-    $validUnit = $viewData['validUntil'];
-@endphp
+
 <div class="page-loader">
     <div class="lds-ellipsis">
         <div></div>
@@ -19,7 +17,7 @@
 <![endif]-->
 <!-- Start Header -->
 <header class="header axil-header header-style-2">
-    <div class="timer-box-date" data-time="{{ $validUnit }}"></div>
+    <div class="timer-box-date"></div>
     <div class="header-top-campaign campaign-data">
         <div class="container position-relative">
             <div class="campaign-content">
@@ -96,24 +94,24 @@
                             </li>
                         </ul>
                         @mobile
-                        <div class="profile-details d-sm-none d-flex">
-                            <div class="inner">
-                                <h5 style="font-size: large">Kapil Singla</h5>
-                                <h6 style="font-size: medium">FBO ID: 200002416566</h6>
-                                <div class="popover-details-wrapper">
-                                    <div class="popover-details">
-                                        <h6>A Licensed Dental Surgeon (BDS); MBA</h6>
-                                        <h6>Dental Public health Resident; Drug Safety Manager</h6>
-                                        <h6>Independent FLP Distributor Since Jan 2011</h6>
-                                        <a href="mailto:yourflpdistributor@gmail.com">yourflpdistributor@gmail.com</a>
+                            <div class="profile-details d-sm-none d-flex">
+                                <div class="inner">
+                                    <h5 style="font-size: large">Kapil Singla</h5>
+                                    <h6 style="font-size: medium">FBO ID: 200002416566</h6>
+                                    <div class="popover-details-wrapper">
+                                        <div class="popover-details">
+                                            <h6>A Licensed Dental Surgeon (BDS); MBA</h6>
+                                            <h6>Dental Public health Resident; Drug Safety Manager</h6>
+                                            <h6>Independent FLP Distributor Since Jan 2011</h6>
+                                            <a href="mailto:yourflpdistributor@gmail.com">yourflpdistributor@gmail.com</a>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="dummy-profile-image">
+                                    <img src="{{ asset('images/about/about-me.jpg') }}" alt="about-me-profile"
+                                        style="border-radius: 100%" />
+                                </div>
                             </div>
-                            <div class="dummy-profile-image">
-                                <img src="{{ asset('images/about/about-me.jpg') }}" alt="about-me-profile"
-                                    style="border-radius: 100%" />
-                            </div>
-                        </div>
                         @elsemobile
                         @endmobile
                     </nav>
@@ -127,27 +125,27 @@
                 </div>
                 @mobile
                 @elsemobile
-                <div class="d-md-block d-none">
-                    <div class="profile-details">
-                        <div class="inner">
-                            <h5 style="font-size: medium">Kapil Singla</h5>
-                            <h6 style="font-size: small">Forever Business Owner (FBO)</h6>
-                            <h6 style="font-size: small">FBO ID: 200002416566</h6>
-                            <div class="popover-details-wrapper">
-                                <div class="popover-details">
-                                    <h6>A Licensed Dental Surgeon (BDS); MBA</h6>
-                                    <h6>Dental Public Health Resident; Drug Safety Manager</h6>
-                                    <h6>Independent FLP Distributor Since Jan 2011</h6>
-                                    <a href="mailto:yourflpdistributor@gmail.com">yourFLPdistributor@gmail.com</a>
+                    <div class="d-md-block d-none">
+                        <div class="profile-details">
+                            <div class="inner">
+                                <h5 style="font-size: medium">Kapil Singla</h5>
+                                <h6 style="font-size: small">Forever Business Owner (FBO)</h6>
+                                <h6 style="font-size: small">FBO ID: 200002416566</h6>
+                                <div class="popover-details-wrapper">
+                                    <div class="popover-details">
+                                        <h6>A Licensed Dental Surgeon (BDS); MBA</h6>
+                                        <h6>Dental Public Health Resident; Drug Safety Manager</h6>
+                                        <h6>Independent FLP Distributor Since Jan 2011</h6>
+                                        <a href="mailto:yourflpdistributor@gmail.com">yourFLPdistributor@gmail.com</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="dummy-profile-image">
-                            <img src="{{ asset('images/about/about-me.jpg') }}" alt="about-me-profile-2"
-                                style="border-radius: 100%" />
+                            <div class="dummy-profile-image">
+                                <img src="{{ asset('images/about/about-me.jpg') }}" alt="about-me-profile-2"
+                                    style="border-radius: 100%" />
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endmobile
                 <div class="header-action mt-0 d-flex align-items-center d-md-none d-block"
                     style="margin-left: 0 !important">
