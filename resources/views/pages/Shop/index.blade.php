@@ -140,7 +140,9 @@
                                                 <a href="{{ $item->affiliate_link }}" target="_blank">Buy Now</a>
                                             </li>
                                             <li class="select-option">
-                                                <a class="btn-default" href="">See Details</a>
+                                                <a class="btn-default"
+                                                    href="{{ route('product', ['country' => Session::get('country'), 'category' => str_replace(' ', '-', $item->singlecategory), 'name' => $item->slug]) }}">See
+                                                    Details</a>
                                             </li>
                                         </ul>
                                     </div>
