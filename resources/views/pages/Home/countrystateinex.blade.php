@@ -39,28 +39,36 @@
 
                     <div class="col-xl-8 col-lg-6">
                         <div class="about-content content-right">
+                            @if (Route::current()->getName() === 'page-home')
+                                <p>
+                                    Forever Living Products is quickly becoming an international sensation. With its diverse
+                                    range of natural products, the company has been able to establish a presence in
+                                    different
+                                    states across the world. From nutritional supplements and personal care products to
+                                    bee-derived skincare items, Forever Living Products have become popular among customers
+                                    looking for high-quality yet affordable options.
+                                    <br>
+                                    <br>
+                                    The company makes sure that its products are grown and produced in natural habitats
+                                    along
+                                    with stringent quality control measures. In addition, their team of qualified
+                                    professionals
+                                    ensures that all ingredients used are safe and effective for use. This commitment to
+                                    excellence has allowed them to gain immense popularity in various countries such as the
+                                    <b>United States, Australia, Canada, and the United Kingdom,</b> and many more.
+                                    Customers
+                                    from these countries can now enjoy access to all of Forever Living's unique offerings
+                                    without having to worry about any potential risks or side effects associated with their
+                                    usage.
+                                </p>
+                            @endif
 
-                            <p>
-                                Forever Living Products is quickly becoming an international sensation. With its diverse
-                                range of natural products, the company has been able to establish a presence in
-                                different
-                                states across the world. From nutritional supplements and personal care products to
-                                bee-derived skincare items, Forever Living Products have become popular among customers
-                                looking for high-quality yet affordable options.
-                                <br>
-                                <br>
-                                The company makes sure that its products are grown and produced in natural habitats
-                                along
-                                with stringent quality control measures. In addition, their team of qualified
-                                professionals
-                                ensures that all ingredients used are safe and effective for use. This commitment to
-                                excellence has allowed them to gain immense popularity in various countries such as the
-                                <b>United States, Australia, Canada, and the United Kingdom,</b> and many more.
-                                Customers
-                                from these countries can now enjoy access to all of Forever Living's unique offerings
-                                without having to worry about any potential risks or side effects associated with their
-                                usage.
-                            </p>
+                            @if (Route::currentRouteName() == 'page-home' &&
+                                    request()->route()->hasParameter('country'))
+                                <p>
+                                    fjsfjksdfjdjks
+                                </p>
+                            @endif
 
                         </div>
                     </div>

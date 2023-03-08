@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 @section('content')
     <main class="main-wrapper">
         <!-- Start Shop Area  -->

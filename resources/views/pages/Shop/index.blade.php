@@ -40,7 +40,7 @@
                                                 <img src="https://via.placeholder.com/200x200" alt="Product Images">
                                             </a>
                                         </div>
-                                        <span class="price">$ 120</span>
+                                        <span class="price">{{ $country }}</span>
                                     </div>
                                 </div>
                             </div>

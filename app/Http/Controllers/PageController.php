@@ -13,6 +13,7 @@ use App\Models\products;
 use App\Models\Countries;
 use Session;
 use Str;
+use Route;
 
 class PageController extends Controller
 {
@@ -27,6 +28,13 @@ class PageController extends Controller
         ]);
 
         Session()->put('country', 'unitedstates');
+        // redirect to home page with country and home //
+
+        // current route is with country and rest area //
+        $currentRoute = Route::currentRouteName();
+        $currentRouteWithParams = Route::hasParameter('country');
+
+        dd($currentRoute, $currentRouteWithParams);
 
         return view('pages.Home.index');
     }
@@ -78,7 +86,7 @@ class PageController extends Controller
         
         // unique categories //
         $filteredcategories = array_unique($filteredcategories);        
-        return view('pages.Shop.index', compact('firstthreeproducts','products','filteredcategories'));
+        return view('pages.Shop.index', compact('firstthreeproducts','products','filteredcategories','country'));
     }
     
     public function loadMoreProducts($country, $category)
