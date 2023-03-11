@@ -12,12 +12,13 @@
                                     <a href="">Homepage</a>
                                 </li>
                             </ul>
-                            <h1 class="title">Forever Living Products</h1>
+                            <h1 class="title">Forever Living Products ({{ $iso_name }})</h1>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4 col-6 d-flex justify-content-end">
                         <a href="#">
-                            <img class="country-flag" src="" height="160" width="160" alt="Product" />
+                            <img class="country-flag" src="{{ $stateflag }}" height="160" width="160"
+                                alt="Product" />
                         </a>
                     </div>
                 </div>
@@ -39,36 +40,53 @@
 
                     <div class="col-xl-8 col-lg-6">
                         <div class="about-content content-right">
-                            @if (Route::current()->getName() === 'page-home')
-                                <p>
-                                    Forever Living Products is quickly becoming an international sensation. With its diverse
-                                    range of natural products, the company has been able to establish a presence in
-                                    different
-                                    states across the world. From nutritional supplements and personal care products to
-                                    bee-derived skincare items, Forever Living Products have become popular among customers
-                                    looking for high-quality yet affordable options.
-                                    <br>
-                                    <br>
-                                    The company makes sure that its products are grown and produced in natural habitats
-                                    along
-                                    with stringent quality control measures. In addition, their team of qualified
-                                    professionals
-                                    ensures that all ingredients used are safe and effective for use. This commitment to
-                                    excellence has allowed them to gain immense popularity in various countries such as the
-                                    <b>United States, Australia, Canada, and the United Kingdom,</b> and many more.
-                                    Customers
-                                    from these countries can now enjoy access to all of Forever Living's unique offerings
-                                    without having to worry about any potential risks or side effects associated with their
-                                    usage.
-                                </p>
-                            @endif
+                            <h1>Forever Living company in {{ $drestareagetid->name }}, {{ $statename }},
+                                {{ $filteredcountry }}
+                            </h1>
+                            <p>
+                                Forever Living Products is a leading health and wellness company that has been in operation
+                                for over 40 years. The Arizona-based company sells a range of natural supplements, drinks,
+                                beauty products, and health foods to customers all around the world. Over the years, Forever
+                                Living Products has expanded its reach significantly - making its presence felt in all
+                                states/counties across United States. The company boasts of an impressive selection of
+                                products available for sale in every state. From their best-selling aloe vera gelly to their
+                                weight management or Aloe Vera Drinks, customers can find everything they need to lead a
+                                healthy life without having to go too far. In addition to this, customers also have access
+                                to convenient online shopping options which allow them to shop from anywhere at any time.
+                            </p>
 
-                            @if (Route::currentRouteName() == 'page-home' &&
-                                    request()->route()->hasParameter('country'))
-                                <p>
-                                    fjsfjksdfjdjks
-                                </p>
-                            @endif
+                            <p>
+                                Forever Living Products (FLP) is one of the world’s largest manufacturers and distributors
+                                of health, wellness, and beauty products. Over the past two decades, FLP has established its
+                                presence in numerous countries worldwide. As such, FLP Distributors can be found in various
+                                counties/cities across <strong>{{ $statename }}</strong>. Many new independent
+                                distributors have joined
+                                FLP in {{ $statename }} where customers can access quality aloe vera products with ease.
+                                Within {{ $statename }}, @foreach ($firstfiverestareas as $item)
+                                    <strong style="text-decoration: underline"> {{ $item->name }}</strong>,
+                                @endforeach and
+                                <strong style="text-decoration: underline">{{ $sixthrestarea }}</strong> offer an array of
+                                distribution centers or FLP distributors for customers seeking
+                                natural or herbal remedies that are effective yet affordable. In addition to these,
+                                distributors are also available throughout cities like @foreach ($aftersixrestareas as $item)
+                                    <span style="text-decoration: underline">{{ $item->name }},</span>
+                                @endforeach – providing customers with convenient access to
+                                superior-quality health and wellness
+                                solutions at competitive prices.
+                            </p>
+
+                            <p>
+                                If you’re interested in finding out more information or contacting one of their
+                                distributors, simply <strong><a
+                                        href="https://foreverliving.com/usa/en-us/about?fboId=200002416566"
+                                        style="color: var(--color-primary)">VISIT HERE</a></strong> to
+                                join my FLP network, and feel free to email me <strong><a
+                                        style="color: var(--color-primary)"
+                                        href="mailo:YourFLPDistributor@gmail.com">@YourFLPDistributor@gmail.com</a></strong>
+                            </p>
+
+                            <a href="https://foreverliving.com/usa/en-us/about?fboId=200002416566"
+                                class="axil-btn btn-bg-primary">Know More About FLP</a>
 
                         </div>
                     </div>
@@ -105,7 +123,8 @@
                                 high-quality healthcare items are available to customers wherever
                                 they may be in the world.
                             </p>
-                            <a href="" class="axil-btn btn-bg-primary">Shop Now*</a>
+                            <a href="{{ route('page-shop', strtolower(str_replace(' ', '', $country))) }}"
+                                class="axil-btn btn-bg-primary">Shop Now*</a>
                         </div>
                     </div>
                 </div>
@@ -144,6 +163,7 @@
                                 Products Company is certain to have something that will meet your
                                 individual needs.
                             </p>
+                            <a href="" class="axil-btn btn-bg-primary">See All Products</a>
                         </div>
                     </div>
                 </div>
@@ -187,6 +207,8 @@
                                 due to taxes or shipping costs involved in transporting the goods
                                 internationally.
                             </p>
+                            <a href="https://bit.ly/PreferredCustomer-{{ $iso_name == 'US' ? 'USA' : $iso_name }}"
+                                class="axil-btn btn-bg-primary">Become A Preferred Customer &amp; Get 5% Off*</a>
                         </div>
                     </div>
                 </div>
@@ -251,7 +273,22 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 order-lg-2">
                         <div class="about-thumbnail">
-                            <img src="" alt="about" />
+                            @if ($iso_name == 'US')
+                                <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569428747899.png"
+                                    alt="about">
+                            @elseif($iso_name == 'GB')
+                                <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pack_pd_main_512_X_512_1664568997643.jpg"
+                                    alt="about">
+                            @elseif($iso_name == 'AU')
+                                <img src="https://cdn.foreverliving.com/content/products/images/syj_c9_combo_pack_pd_main_512_X_512_1656638991235.jpg"
+                                    alt="about">
+                            @elseif($iso_name == 'CA')
+                                <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569434726154.png"
+                                    alt="about">
+                            @else
+                                <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569428747899.png"
+                                    alt="about">
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-7 order-lg-1">
@@ -286,6 +323,83 @@
                                 and invite you to join our FLP family. Look for someone with
                                 experience in the industry so they can provide helpful advice and
                                 tips on how to make more profits in the long run.
+                            </p>
+
+                            <p>
+                                <strong>LOOKING FOR A FBO SPONSORSHIP IN {{ $iso_name == 'US' ? 'USA' : $iso_name }}
+                                    ?</strong> – JOIN OUR
+                                FLP BUSINESS FAMILY, SAVE 5% INSTANTLY ON YOUR FIRST ORDER & A LOT MORE ON YOUR NEXT ORDER
+
+                            </p>
+                            <a href="https://bit.ly/FBO-{{ $iso_name == 'US' ? 'USA' : $iso_name }}"
+                                class="axil-btn btn-bg-primary" style="margin: 5px 0px;">Start
+                                Your FBO Journey With
+                                2cc Value Pak Now*</a>
+
+                            <p>
+                                We included a great range of products for you to use and market from our flagship Forever
+                                Aloe Vera Gel® to personal care, skincare and nutritional favorites. You’ll also find some
+                                helpful marketing materials ready to help you market your Forever business.
+                            </p>
+
+                            <h6 style="margin-bottom: 0px;">
+                                @if ($iso_name == 'CA')
+                                    Start Your Journey C9 COMBO PACK
+                                @elseif($iso_name == 'GB')
+                                    Start Your Journey C9 COMBO PACK
+                                @else
+                                    Start Your Journey Pak
+                                @endif
+                                -
+                                {{ $iso_name == 'US' ? 'USA' : $iso_name }}
+                            </h6>
+                            </h6>
+                            @if ($iso_name == 'US')
+                                <p>
+                                    • 12 PACK OF 330ML ALOE VERA GEL MINIS • FOREVER ARGI+ • FOREVER LEMON AND LAVENDER
+                                    ESSENTIAL OILS • FOREVER ARCTIC SEA • FOREVER ACTIVE PRO-B • ALOE VERA GELLY • ALOE HEAT
+                                    LOTION • ALOE PROPOLIS CREME • ALOE MOISTURIZING LOTION • ALOE LIQUID SOAP • FOREVER
+                                    ALOE SCRUB • FOREVER BRIGHT TOOTHGEL • ALOE LIPS • ENGLISH PRODUCT CATALOG • ALOE AS
+                                    NATURE INTENDED (SINGLE) • WHY FOREVER VALUE PAK
+                                </p>
+                            @elseif($iso_name == 'AU')
+                                <p>
+                                    C9 COMBO PACK 1: • ALOE VERA GEL - 1LTR X2 • FOREVER LITE POUCH - VANILLA X 1 • FOREVER
+                                    FIBER X1 • GARCINIA PLUS X 1 • THERM X 1
+                                    C9 COMBO PACK 2: • ALOE VERA GEL - 1LTR X2 • FOREVER LITE POUCH - CHOCOLATE X 1 •
+                                    FOREVER FIBER X1 • GARCINIA PLUS X 1 • THERM X 1
+                                </p>
+                            @elseif($iso_name == 'GB')
+                                <p>
+                                    • FOREVER ALOE VERA GEL X 2 • FOREVER ALOE BERRY NECTAR X 2 • FOREVER BRIGHT TOOTHGEL X
+                                    2 • ALOE EVER-SHIELD DEODORANT X 2 • ALOE PROPOLIS CRÈME X 2 • ALOE VERA GELLY X 2 •
+                                    ALOE LIPS X 2 • FOREVER LITE ULTRA – 15 SERVING POUCH – VANILLA X 2 • ALOE MOISTURISING
+                                    LOTION X 2 • AVOCADO FACE & BODY SOAP X 2 • ALOE SHOT GLASS X 1 • RECEIPT PAD X 1 •
+                                    PRODUCT BROCHURE X 1 • FBO ORDER FORM X 1 • FIRST STEPS TO MANAGER BROCHURE X 1 • ALOE
+                                    FLYER X 10 • WELCOME BOOKLET X 1 • EAGLE PIN X 1 • PRODUCT MANUAL X 1 • DSA EARNINGS
+                                    OPPORTUNITIES X 1 • DSA SHOPPING AT HOME X 1 • DOCUMENT CASE • PRODUCT INFORMATION FLYER
+                                    A5 X 10 • BUSINESS INFORMATION FLYER A5 X 10 • CONTACT MARKETING CARDS A6 FOLDED X 25 •
+                                    COLLAGEN FLYER X 1 • PRICE LIST X 1
+                                </p>
+                            @elseif($iso_name == 'CA')
+                                <p>
+                                    • FOREVER LITE ULTRA VANILLA • ALOE LIPS (2) • FOREVER BRIGHT (2) • PROPOLIS CRÈME (2) •
+                                    ALOE VERA GELLY (2) • MOISTURIZING LOTION (2) • ALOE HEAT LOTION (2) • EVER SHIELD •
+                                    ALOE MSM GEL • ALOE SCRUB • ARCTIC SEA • FOREVER ACTIVE PRO-B • JOJOBA SHAMPOO • JOJOBA
+                                    CONDITIONING RINSE • ALOE LIQUID SOAP SOAP • ALOE VERA GEL (2) • ALOE BERRY NECTAR • WHY
+                                    FOREVER (SINGLE) • ALOE BROCHURE • PRODUCT BROCHURE
+                                </p>
+                            @else
+                                <p>
+                                    • 12 PACK OF 330ML ALOE VERA GEL MINIS • FOREVER ARGI+ • FOREVER LEMON AND LAVENDER
+                                    ESSENTIAL OILS • FOREVER ARCTIC SEA • FOREVER ACTIVE PRO-B • ALOE VERA GELLY • ALOE HEAT
+                                    LOTION • ALOE PROPOLIS CREME • ALOE MOISTURIZING LOTION • ALOE LIQUID SOAP • FOREVER
+                                    ALOE SCRUB • FOREVER BRIGHT TOOTHGEL • ALOE LIPS • ENGLISH PRODUCT CATALOG • ALOE AS
+                                    NATURE INTENDED (SINGLE) • WHY FOREVER VALUE PAK
+                                </p>
+                            @endif
+                            <p>
+                                *Price & Contents in pak are subject to change based on location & availability.
                             </p>
                         </div>
                     </div>
@@ -358,7 +472,26 @@
         <section class="section-gap">
             <div class="container">
                 <div class="product-detail-section">
-                    <h4>Products Line In</h4>
+                    <h4>Delivering Across {{ $statename }}</h4>
+                    @foreach ($getrestareas as $item)
+                        <a
+                            href="{{ route('page-home', ['country' => $country, 'restArea' => str_replace(' ', '', $statename), 'extra' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section class="section-gap">
+            <div class="container">
+                <div class="product-detail-section">
+                    <h4>Products Line In {{ $iso_name }}</h4>
+                    @foreach ($getproductslist as $item)
+                        <a href="{{ route('product', ['country' => $country, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
+                            style="text-transform:capitalize">{{ str_replace('-', ' ', $item->slug) }}<span>,
+                            </span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </section>

@@ -162,10 +162,13 @@
                                     <a href="{{ route('page-shop', 'unitedstates') }}">Shop</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('page-join-now', ['country' => 'unitedstates']) }}">Join Now</a>
+                                    <a
+                                        href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename]) }}">Join
+                                        Now</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('page-blogs', 'unitedstates') }}">Blogs</a>
+                                    <a
+                                        href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename]) }}">Blogs</a>
                                 </li>
                             </ul>
                             <div class="profile-details">

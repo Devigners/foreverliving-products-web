@@ -141,7 +141,7 @@
         e.preventDefault();
         var category = $(this).attr('data-category');
 
-        var url = "{{ route('page-shop', 'unitedstates') }}";
+        var url = "{{ route('page-loadproducts', 'unitedstates') }}";
         $.ajax({
             url: url + '/' + category,
             type: 'GET',

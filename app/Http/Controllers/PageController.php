@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Crypt;
 // products //
 use DB;
 use App\Models\products;
+use App\Models\States;
+use App\Models\RestAreas;
 use App\Models\Countries;
 use Session;
 use Str;
@@ -20,23 +22,215 @@ class PageController extends Controller
 
     use AppCommonTraits;
 
-    public function index()
+    public function index(Request $request, $country, $restArea = null, $extra=null)
     {
+        
         $this->generateSeoData([
             'title' => 'Home',
             'description' => 'Home',
         ]);
-
-        Session()->put('country', 'unitedstates');
-        // redirect to home page with country and home //
-
-        // current route is with country and rest area //
+        
+        Session()->put('country', $country);
+     
         $currentRoute = Route::currentRouteName();
-        $currentRouteWithParams = Route::hasParameter('country');
+        $parameters = Route::current()->parameters();
+       
+        $countparameters = count($parameters);
+        
+        if($countparameters == 1){
+           
+            $filteredcountry = '';
+            $filteredcountryname = '';
+            $filteredcountryiso = '';
+            $countries = Countries::get();
+            foreach ($countries as $key => $value) {
+                $value->country_name = strtolower(str_replace(' ','',$value->name));
+                if($value->country_name == $country){
+                    $filteredcountry = $value->id;
+                    $filteredcountryname = $value->name;
+                    $filteredcountryiso = $value->iso_name;
+                }
+            }
+            
+            $getstated = States::select('id','name')->where('country_id', $filteredcountry)->get();
+            $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($filteredcountryiso))->get();
 
-        dd($currentRoute, $currentRouteWithParams);
+            foreach($getproductslist as $key => $value){
+                // filter cateogry and get first category //
+                $value->category = explode(',',$value->category);
+                $value->category = $value->category[0];
+            }
+            $statename = null;
+            
+            return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename'));
+           
+        }
+        elseif($countparameters == 2){
+            $filteredcountry = '';
+            $countryid = '';
+            $iso_name = '';
+            $countries = Countries::get();
+            foreach ($countries as $key => $value) {
+                $value->country_name = strtolower(str_replace(' ','',$value->name));
+                if($value->country_name == $country){
+                    $filteredcountry = $value->name;
+                    $countryid = $value->id;
+                    $iso_name = $value->iso_name;
+                }
+            }
 
-        return view('pages.Home.index');
+           
+
+            $filteredstate = '';
+            $stateflag = '';
+            $statename = '';
+            $states = States::get();
+            foreach ($states as $key => $value) {
+                $value->state_name = str_replace(' ','',$value->name);
+                if($value->state_name == $parameters['restArea']){
+                    $filteredstate = $value->id;
+                    $statename = $value->name;
+                    $stateflag = $value->image_url;
+                }
+            }
+            
+            
+            $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($iso_name))
+            ->get();
+
+            foreach($getproductslist as $key => $value){
+                // filter cateogry and get first category //
+                $value->category = explode(',',$value->category);
+                $value->category = $value->category[0];
+            }
+
+            $getrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->get();
+            
+
+            $firstfiverestareas = RestAreas::select('name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->limit(5)->get()->all();
+
+            $sixthrestarea = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->offset(5)->limit(1)->pluck('name')->first();
+           
+            $aftersixrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
+           
+            
+            return view('pages.Home.countrystateindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist'));
+        }
+        elseif($countparameters == 3){
+            $filteredcountry = '';
+            $countryid = '';
+            $iso_name = '';
+            $countries = Countries::get();
+            foreach ($countries as $key => $value) {
+                $value->country_name = strtolower(str_replace(' ','',$value->name));
+                if($value->country_name == $country){
+                    $filteredcountry = $value->name;
+                    $countryid = $value->id;
+                    $iso_name = $value->iso_name;
+                }
+            }
+
+        
+            $filteredstate = '';
+            $stateflag = '';
+            $statename = '';
+            $states = States::get();
+            foreach ($states as $key => $value) {
+                $value->state_name = str_replace(' ','',$value->name);
+                if($value->state_name == $parameters['restArea']){
+                    $filteredstate = $value->id;
+                    $statename = $value->name;
+                    $stateflag = $value->image_url;
+                }
+            }
+
+            $requestedrestarea = $parameters['extra'];
+            
+            $filtereddynrestarae = '';
+            $getdynrestarea = RestAreas::get();
+            foreach ($getdynrestarea as $key => $value) {
+                $value->radynname = str_replace(' ','',$value->name);
+                if($value->radynname == $parameters['extra']){
+                    $filtereddynrestarae = $value->id;
+                }
+            } 
+
+            $drestareagetid = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->where('id',$filtereddynrestarae)->get()->first();
+            
+            
+            $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($iso_name))
+            ->get();
+
+            foreach($getproductslist as $key => $value){
+                // filter cateogry and get first category //
+                $value->category = explode(',',$value->category);
+                $value->category = $value->category[0];
+            }
+
+            $getrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->get();
+            
+
+            $firstfiverestareas = RestAreas::select('name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->limit(5)->get()->all();
+
+            $sixthrestarea = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->offset(5)->limit(1)->pluck('name')->first();
+           
+            $aftersixrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
+           
+            
+                return view('pages.Home.countrystateextraindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid'));
+        }
+       
+        else
+        {
+            $country = 'unitedstates';
+            $filteredcountry = '';
+            $countries = Countries::get();
+            foreach ($countries as $key => $value) {
+                $value->country_name = strtolower(str_replace(' ','',$value->name));
+                //   $countriesarray[] = $value->country_name;
+                if($value->country_name == $country){
+                    $filteredcountry = $value->id;
+                }
+            }
+
+            $filteredcountry = '';
+            $filteredcountryname = '';
+            $filteredcountryiso = '';
+            $countries = Countries::get();
+            foreach ($countries as $key => $value) {
+                $value->country_name = strtolower(str_replace(' ','',$value->name));
+                if($value->country_name == $country){
+                    $filteredcountry = $value->id;
+                    $filteredcountryname = $value->name;
+                    $filteredcountryiso = $value->iso_name;
+                }
+            }
+            
+            
+            $getstated = States::select('id','name')->where('country_id', $filteredcountry)->get();
+            $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($filteredcountryiso))->get();
+
+            foreach($getproductslist as $key => $value){
+                // filter cateogry and get first category //
+                $value->category = explode(',',$value->category);
+                $value->category = $value->category[0];
+            }
+
+            $statename = null;
+            
+            return view('pages.Home.index', compact('getstated', 'filteredcountryname','filteredcountryiso','country','getproductslist','statename'));
+        }      
+        
+        
     }
 
     // shop
@@ -84,13 +278,17 @@ class PageController extends Controller
             }
         }
         
-        // unique categories //
-        $filteredcategories = array_unique($filteredcategories);        
-        return view('pages.Shop.index', compact('firstthreeproducts','products','filteredcategories','country'));
+            // unique categories //
+            $filteredcategories = array_unique($filteredcategories); 
+           $statename = null;
+            // go to shop page and change url //
+            return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename'));
+            
     }
     
-    public function loadMoreProducts($country, $category)
+    public function loadMoreProducts($country,$category)
     {
+        
         $filteredcountry = '';
         $countries = Countries::get();
         foreach ($countries as $key => $value) {
@@ -130,7 +328,8 @@ class PageController extends Controller
             'title' => 'Join Now',
             'description' => 'Join Now',
         ]);
-        return view('pages.JoinNow.index');
+        $statename = null;
+        return view('pages.JoinNow.index', compact('country','statename'));
     }
 
     // blogs
@@ -156,8 +355,8 @@ class PageController extends Controller
         $pageCat = array_unique($pageCat);
 
         $pageCat = array_diff($pageCat, ['Uncategorized']);
-
-        return view('pages.Blogs.index', compact('data', 'pageCat'));
+        $statename = null;
+        return view('pages.Blogs.index', compact('data', 'pageCat', 'country','statename'));
     }
 
     // blogs detail
@@ -201,6 +400,7 @@ class PageController extends Controller
             }
         }
 
+
         $products = products::select('id','title','slug','category','sku','price','quantity','image_link','short_description','description','affiliate_link','total_reviews', 'total_rating','usage','quantity','ingredients','tags')->where('status', 'Active')
         ->where('slug', $name)
         ->where('country', $filteredcountry)
@@ -227,6 +427,8 @@ class PageController extends Controller
 
         $products->total_rating = $total_rating;
 
-        return view('pages.Products.detail', compact('products'));
+        $statename = null;
+
+        return view('pages.Products.detail', compact('products','country','statename'));
     }
 }

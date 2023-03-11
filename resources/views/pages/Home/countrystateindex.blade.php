@@ -12,30 +12,13 @@
                                     <a href="">Homepage</a>
                                 </li>
                             </ul>
-                            <h1 class="title">Forever Living Products ({{ $filteredcountryiso }})</h1>
+                            <h1 class="title">Forever Living Products ({{ $iso_name }})</h1>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4 col-6 d-flex justify-content-end">
                         <a href="#">
-                            {{-- {{ dd($filteredcountryiso) }} --}}
-                            @if ($filteredcountryiso == 'US')
-                                <img class="country-flag"
-                                    src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
-                                    height="160" width="160" alt="United States" />
-                            @elseif($filteredcountryiso == 'GB')
-                                <img class="country-flag"
-                                    src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
-                                    height="160" width="160" alt="Great Britain" />
-                            @elseif($filteredcountryiso == 'AU')
-                                <img class="country-flag"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg"
-                                    height="160" width="160" alt="Australia" />
-                            @elseif($filteredcountryiso == 'CA')
-                                <img class="country-flag"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg"
-                                    height="160" width="160" alt="Canada" />
-                            @endif
-
+                            <img class="country-flag" src="{{ $stateflag }}" height="160" width="160"
+                                alt="Product" />
                         </a>
                     </div>
                 </div>
@@ -57,20 +40,37 @@
 
                     <div class="col-xl-8 col-lg-6">
                         <div class="about-content content-right">
-                            <h1>Forever Living company in {{ $filteredcountryname }}</h1>
+                            <h1>Forever Living company in {{ $statename }}, {{ $filteredcountry }}</h1>
                             <p>
-                                {{ $filteredcountryname }} is one of the most important markets for Forever Living Products
-                                and the company has been active in {{ $filteredcountryname }} for several decades. The
-                                presence of Forever Living Products in different states/counties/cities across
-                                {{ $filteredcountryname }} has provided customers with access to a wide range of products
-                                such as natural health supplements, weight loss products, skincare items, nutritional
-                                beverages, and many more. Forever Living Products offers a variety of services to its
-                                customers such as free delivery, customer support, and product training sessions for those
-                                looking to start their own business selling Forever Living's products. Additionally, there
-                                are several stores located throughout different states/counties/cities that offer discounted
-                                prices on select merchandise and promotional events held periodically throughout the year.
-                                The company is constantly expanding its reach across {{ $filteredcountryname }} by setting
-                                up new locations and introducing new product lines that cater to local customer needs.
+                                Forever Living Products is a leading health and wellness company that has been in operation
+                                for over 40 years. The Arizona-based company sells a range of natural supplements, drinks,
+                                beauty products, and health foods to customers all around the world. Over the years, Forever
+                                Living Products has expanded its reach significantly - making its presence felt in all
+                                states/counties across United States. The company boasts of an impressive selection of
+                                products available for sale in every state. From their best-selling aloe vera gelly to their
+                                weight management or Aloe Vera Drinks, customers can find everything they need to lead a
+                                healthy life without having to go too far. In addition to this, customers also have access
+                                to convenient online shopping options which allow them to shop from anywhere at any time.
+                            </p>
+
+                            <p>
+                                Forever Living Products (FLP) is one of the world’s largest manufacturers and distributors
+                                of health, wellness, and beauty products. Over the past two decades, FLP has established its
+                                presence in numerous countries worldwide. As such, FLP Distributors can be found in various
+                                counties/cities across <strong>{{ $statename }}</strong>. Many new independent
+                                distributors have joined
+                                FLP in {{ $statename }} where customers can access quality aloe vera products with ease.
+                                Within {{ $statename }}, @foreach ($firstfiverestareas as $item)
+                                    <strong style="text-decoration: underline"> {{ $item->name }}</strong>,
+                                @endforeach and
+                                <strong style="text-decoration: underline">{{ $sixthrestarea }}</strong> offer an array of
+                                distribution centers or FLP distributors for customers seeking
+                                natural or herbal remedies that are effective yet affordable. In addition to these,
+                                distributors are also available throughout cities like @foreach ($aftersixrestareas as $item)
+                                    <span style="text-decoration: underline">{{ $item->name }},</span>
+                                @endforeach – providing customers with convenient access to
+                                superior-quality health and wellness
+                                solutions at competitive prices.
                             </p>
 
                             <p>
@@ -161,8 +161,7 @@
                                 Products Company is certain to have something that will meet your
                                 individual needs.
                             </p>
-                            <a href="{{ route('page-shop', strtolower(str_replace(' ', '', $country))) }}"
-                                class="axil-btn btn-bg-primary">Check Our Products</a>
+                            <a href="" class="axil-btn btn-bg-primary">See All Products</a>
                         </div>
                     </div>
                 </div>
@@ -206,9 +205,8 @@
                                 due to taxes or shipping costs involved in transporting the goods
                                 internationally.
                             </p>
-                            <a href="https://bit.ly/PreferredCustomer-{{ $filteredcountryiso == 'US' ? 'USA' : $filteredcountryiso }}"
-                                class="axil-btn btn-bg-primary">Become A
-                                Preferred Customer &amp; Get 5% Off*</a>
+                            <a href="https://bit.ly/PreferredCustomer-{{ $iso_name == 'US' ? 'USA' : $iso_name }}"
+                                class="axil-btn btn-bg-primary">Become A Preferred Customer &amp; Get 5% Off*</a>
                         </div>
                     </div>
                 </div>
@@ -273,23 +271,22 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 order-lg-2">
                         <div class="about-thumbnail">
-                            @if ($filteredcountryiso == 'US')
+                            @if ($iso_name == 'US')
                                 <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569428747899.png"
                                     alt="about">
-                            @elseif($filteredcountryiso == 'GB')
+                            @elseif($iso_name == 'GB')
                                 <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pack_pd_main_512_X_512_1664568997643.jpg"
                                     alt="about">
-                            @elseif($filteredcountryiso == 'AU')
+                            @elseif($iso_name == 'AU')
                                 <img src="https://cdn.foreverliving.com/content/products/images/syj_c9_combo_pack_pd_main_512_X_512_1656638991235.jpg"
                                     alt="about">
-                            @elseif($filteredcountryiso == 'CA')
+                            @elseif($iso_name == 'CA')
                                 <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569434726154.png"
                                     alt="about">
                             @else
                                 <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569428747899.png"
                                     alt="about">
                             @endif
-
                         </div>
                     </div>
                     <div class="col-lg-7 order-lg-1">
@@ -325,12 +322,14 @@
                                 experience in the industry so they can provide helpful advice and
                                 tips on how to make more profits in the long run.
                             </p>
+
                             <p>
-                                <strong>LOOKING FOR A FBO SPONSORSHIP IN {{ $filteredcountryiso }} ?</strong> – JOIN OUR
+                                <strong>LOOKING FOR A FBO SPONSORSHIP IN {{ $iso_name == 'US' ? 'USA' : $iso_name }}
+                                    ?</strong> – JOIN OUR
                                 FLP BUSINESS FAMILY, SAVE 5% INSTANTLY ON YOUR FIRST ORDER & A LOT MORE ON YOUR NEXT ORDER
 
                             </p>
-                            <a href="https://bit.ly/FBO-{{ $filteredcountryiso == 'US' ? 'USA' : $filteredcountryiso }}"
+                            <a href="https://bit.ly/FBO-{{ $iso_name == 'US' ? 'USA' : $iso_name }}"
                                 class="axil-btn btn-bg-primary" style="margin: 5px 0px;">Start
                                 Your FBO Journey With
                                 2cc Value Pak Now*</a>
@@ -342,18 +341,18 @@
                             </p>
 
                             <h6 style="margin-bottom: 0px;">
-                                @if ($filteredcountryiso == 'CA')
+                                @if ($iso_name == 'CA')
                                     Start Your Journey C9 COMBO PACK
-                                @elseif($filteredcountryiso == 'GB')
+                                @elseif($iso_name == 'GB')
                                     Start Your Journey C9 COMBO PACK
                                 @else
                                     Start Your Journey Pak
                                 @endif
                                 -
-                                {{ $filteredcountryiso == 'US' ? 'USA' : $filteredcountryiso }}
+                                {{ $iso_name == 'US' ? 'USA' : $iso_name }}
                             </h6>
                             </h6>
-                            @if ($filteredcountryiso == 'US')
+                            @if ($iso_name == 'US')
                                 <p>
                                     • 12 PACK OF 330ML ALOE VERA GEL MINIS • FOREVER ARGI+ • FOREVER LEMON AND LAVENDER
                                     ESSENTIAL OILS • FOREVER ARCTIC SEA • FOREVER ACTIVE PRO-B • ALOE VERA GELLY • ALOE HEAT
@@ -361,14 +360,14 @@
                                     ALOE SCRUB • FOREVER BRIGHT TOOTHGEL • ALOE LIPS • ENGLISH PRODUCT CATALOG • ALOE AS
                                     NATURE INTENDED (SINGLE) • WHY FOREVER VALUE PAK
                                 </p>
-                            @elseif($filteredcountryiso == 'AU')
+                            @elseif($iso_name == 'AU')
                                 <p>
                                     C9 COMBO PACK 1: • ALOE VERA GEL - 1LTR X2 • FOREVER LITE POUCH - VANILLA X 1 • FOREVER
                                     FIBER X1 • GARCINIA PLUS X 1 • THERM X 1
                                     C9 COMBO PACK 2: • ALOE VERA GEL - 1LTR X2 • FOREVER LITE POUCH - CHOCOLATE X 1 •
                                     FOREVER FIBER X1 • GARCINIA PLUS X 1 • THERM X 1
                                 </p>
-                            @elseif($filteredcountryiso == 'GB')
+                            @elseif($iso_name == 'GB')
                                 <p>
                                     • FOREVER ALOE VERA GEL X 2 • FOREVER ALOE BERRY NECTAR X 2 • FOREVER BRIGHT TOOTHGEL X
                                     2 • ALOE EVER-SHIELD DEODORANT X 2 • ALOE PROPOLIS CRÈME X 2 • ALOE VERA GELLY X 2 •
@@ -380,7 +379,7 @@
                                     A5 X 10 • BUSINESS INFORMATION FLYER A5 X 10 • CONTACT MARKETING CARDS A6 FOLDED X 25 •
                                     COLLAGEN FLYER X 1 • PRICE LIST X 1
                                 </p>
-                            @elseif($filteredcountryiso == 'CA')
+                            @elseif($iso_name == 'CA')
                                 <p>
                                     • FOREVER LITE ULTRA VANILLA • ALOE LIPS (2) • FOREVER BRIGHT (2) • PROPOLIS CRÈME (2) •
                                     ALOE VERA GELLY (2) • MOISTURIZING LOTION (2) • ALOE HEAT LOTION (2) • EVER SHIELD •
@@ -471,21 +470,20 @@
         <section class="section-gap">
             <div class="container">
                 <div class="product-detail-section">
-
-                    <h4>Delivering Across {{ $filteredcountryname }}</h4>
-
-                    @foreach ($getstated as $item)
+                    <h4>Delivering Across {{ $statename }}</h4>
+                    @foreach ($getrestareas as $item)
                         <a
-                            href="{{ route('page-home', ['country' => strtolower(str_replace(' ', '', 'unitedstates')), 'restArea' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
+                            href="{{ route('page-home', ['country' => $country, 'restArea' => str_replace(' ', '', $statename), 'extra' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
                         </a>
                     @endforeach
                 </div>
             </div>
         </section>
+
         <section class="section-gap">
             <div class="container">
                 <div class="product-detail-section">
-                    <h4>Products Line In {{ $filteredcountryiso }}</h4>
+                    <h4>Products Line In {{ $iso_name }}</h4>
                     @foreach ($getproductslist as $item)
                         <a href="{{ route('product', ['country' => $country, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
                             style="text-transform:capitalize">{{ str_replace('-', ' ', $item->slug) }}<span>,

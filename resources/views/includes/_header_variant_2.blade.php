@@ -17,7 +17,7 @@
 <!-- Start Header -->
 <header class="header axil-header header-style-2">
     <div class="timer-box-date"></div>
-    <div class="header-top-campaign campaign-data">
+    {{-- <div class="header-top-campaign campaign-data">
         <div class="container position-relative">
             <div class="campaign-content">
                 <div class="campaign-countdown">
@@ -53,7 +53,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> --}}
     @include('includes._top_bar')
     <!-- Start Mainmenu Area  -->
     <div id="axil-sticky-placeholder"></div>
@@ -83,13 +83,17 @@
                                 <a href="{{ route('page-home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="{{ route('page-shop', 'unitedstates') }}">Shop</a>
+                                <a
+                                    href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename]) }}">Shop</a>
                             </li>
                             <li>
-                                <a href="{{ route('page-join-now', ['country' => 'unitedstates']) }}">Join Now</a>
+                                <a
+                                    href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename]) }}">Join
+                                    Now</a>
                             </li>
                             <li>
-                                <a href="{{ route('page-blogs', 'unitedstates') }}">Blogs</a>
+                                <a
+                                    href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename]) }}">Blogs</a>
                             </li>
                         </ul>
                         @mobile

@@ -16,24 +16,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['as' => 'page-'], function () {
 
-    $pages = '(?!shop|joinnow|blogs|blog-details|product)[a-zA-Z]+';
+    $pages = '(?!shop|joinnow|blogs|blog-details|product|loadproducts)[a-zA-Z]+';
     $where = [
         'country' => $pages,
         'restArea' => $pages,
     ];
 
     // Home
-    Route::get('/{country?}/{restArea?}', [PageController::class, "index"])->name('home')->where($where);
+    Route::get('/{country?}/{restArea?}/{extra?}', [PageController::class, "index"])->name('home')->where($where);
 
     // Shop
-    // Route::get('/{country}/{restArea?}/shop', [PageController::class, "shop"])->name('shop')->where($where);
-    Route::get('/{country}/shop', [PageController::class, "shop"])->name('shop');
-
-    // product detail page //
+    Route::get('/{country}/shop/{restArea?}', [PageController::class, "shop"])->name('shop')->where($where);
+    // Route::get('/{country}/shop', [PageController::class, "shop"])->name('shop');
 
     // Load More Products based on category //
 
-    Route::get('/{country}/shop/{category?}', [PageController::class, "loadMoreProducts"])->name('shop');
+    Route::get('/{country}/loadproducts/{category?}', [PageController::class, "loadMoreProducts"])->name('loadproducts');
 
     // Join Now
     Route::get('/{country}/{restArea?}/joinnow', [PageController::class, "joinNow"])->name('join-now')->where($where);
@@ -52,4 +50,4 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/{country}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail');
 });
 
-Route::get('/{country}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');
+Route::get('/{country?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');

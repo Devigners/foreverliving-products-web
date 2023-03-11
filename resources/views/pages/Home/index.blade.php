@@ -12,12 +12,16 @@
                                     <a href="">Homepage</a>
                                 </li>
                             </ul>
-                            <h1 class="title">Forever Living Products</h1>
+                            <h1 class="title">Forever Living Products (USA)</h1>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-4 col-6 d-flex justify-content-end">
                         <a href="#">
-                            <img class="country-flag" src="" height="160" width="160" alt="Product" />
+                            @if ($country == 'unitedstates')
+                                <img class="country-flag"
+                                    src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
+                                    height="160" width="160" alt="united states" />
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -62,6 +66,18 @@
                                 usage.
                             </p>
 
+                            <p>
+                                If you’re interested in finding out more information or contacting one of their
+                                distributors, simply <strong><a
+                                        href="https://foreverliving.com/usa/en-us/about?fboId=200002416566"
+                                        style="color: var(--color-primary)">VISIT HERE</a></strong> to
+                                join my FLP network, and feel free to email me <strong><a
+                                        style="color: var(--color-primary)"
+                                        href="mailo:YourFLPDistributor@gmail.com">@YourFLPDistributor@gmail.com</a></strong>
+                            </p>
+
+                            <a href="https://foreverliving.com/usa/en-us/about?fboId=200002416566"
+                                class="axil-btn btn-bg-primary">Know More About FLP</a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +113,8 @@
                                 high-quality healthcare items are available to customers wherever
                                 they may be in the world.
                             </p>
-                            <a href="" class="axil-btn btn-bg-primary">Shop Now*</a>
+                            <a href="{{ route('page-shop', strtolower(str_replace(' ', '', 'unitedstates'))) }}"
+                                class="axil-btn btn-bg-primary">Shop Now*</a>
                         </div>
                     </div>
                 </div>
@@ -136,6 +153,8 @@
                                 Products Company is certain to have something that will meet your
                                 individual needs.
                             </p>
+                            <a href="{{ route('page-shop', strtolower(str_replace(' ', '', 'unitedstates'))) }}"
+                                class="axil-btn btn-bg-primary">Check Our Products</a>
                         </div>
                     </div>
                 </div>
@@ -179,6 +198,10 @@
                                 due to taxes or shipping costs involved in transporting the goods
                                 internationally.
                             </p>
+
+                            <a href="https://bit.ly/PreferredCustomer-USA" class="axil-btn btn-bg-primary">Become A
+                                Preferred Customer &amp; Get 5% Off*</a>
+
                         </div>
                     </div>
                 </div>
@@ -243,7 +266,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 order-lg-2">
                         <div class="about-thumbnail">
-                            <img src="" alt="about" />
+                            <img src="https://cdn.foreverliving.com/content/products/images/start_your_journey_pak_pd_main_512_X_512_1569428747899.png"
+                                alt="about" />
                         </div>
                     </div>
                     <div class="col-lg-7 order-lg-1">
@@ -278,6 +302,35 @@
                                 and invite you to join our FLP family. Look for someone with
                                 experience in the industry so they can provide helpful advice and
                                 tips on how to make more profits in the long run.
+                            </p>
+                            <p>
+                                <strong>LOOKING FOR A FBO SPONSORSHIP IN USA ?</strong> – JOIN OUR FLP BUSINESS FAMILY, SAVE
+                                5% INSTANTLY ON YOUR FIRST ORDER & A LOT MORE ON YOUR NEXT ORDER
+                            </p>
+
+                            <strong>
+
+                                <a href="https://bit.ly/FBO-USA" class="axil-btn btn-bg-primary"
+                                    style="margin: 5px 0px;">Start Your FBO Journey With
+                                    2cc Value Pak Now*</a>
+                            </strong>
+                            <br><br>
+                            <p>
+                                We included a great range of products for you to use and market from our flagship Forever
+                                Aloe Vera Gel® to personal care, skincare and nutritional favorites. You’ll also find some
+                                helpful marketing materials ready to help you market your Forever business.
+                            </p>
+                            <p>
+                            <h6 style="margin-bottom: 0px;">Start Your Journey Pak - USA</h6>
+                            </p>
+
+                            <p>
+                                • 12 PACK OF 330ML ALOE VERA GEL MINIS • FOREVER ARGI+ • FOREVER LEMON AND LAVENDER
+                                ESSENTIAL OILS • FOREVER ARCTIC SEA • FOREVER ACTIVE PRO-B • ALOE VERA GELLY • ALOE HEAT
+                                LOTION • ALOE PROPOLIS CREME • ALOE MOISTURIZING LOTION • ALOE LIQUID SOAP • FOREVER ALOE
+                                SCRUB • FOREVER BRIGHT TOOTHGEL • ALOE LIPS • ENGLISH PRODUCT CATALOG • ALOE AS NATURE
+                                INTENDED (SINGLE) • WHY FOREVER VALUE PAK
+
                             </p>
                         </div>
                     </div>
@@ -350,7 +403,27 @@
         <section class="section-gap">
             <div class="container">
                 <div class="product-detail-section">
-                    <h4>Products Line In</h4>
+
+                    <h4>Delivering Across United States</h4>
+                    @foreach ($getstated as $item)
+                        <a
+                            href="{{ route('page-home', ['country' => strtolower(str_replace(' ', '', 'unitedstates')), 'restArea' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
+                        </a>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+        <section class="section-gap">
+            <div class="container">
+                <div class="product-detail-section">
+                    <h4>Products Line In {{ $filteredcountryiso }}</h4>
+                    @foreach ($getproductslist as $item)
+                        <a href="{{ route('product', ['country' => $country, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
+                            style="text-transform:capitalize">{{ str_replace('-', ' ', $item->slug) }}<span>,
+                            </span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </section>

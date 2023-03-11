@@ -37,7 +37,23 @@
                                     <div class="slider-product-box single-product-box" style="height: 100%">
                                         <div class="product-thumb">
                                             <a href="#">
-                                                <img src="https://via.placeholder.com/200x200" alt="Product Images">
+                                                @if ($country == 'unitedstates')
+                                                    <img class="country-flag"
+                                                        src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
+                                                        alt="United States" />
+                                                @elseif($country == 'greatbritain')
+                                                    <img class="country-flag"
+                                                        src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
+                                                        alt="Great Britain" />
+                                                @elseif($country == 'australia')
+                                                    <img class="country-flag"
+                                                        src="https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg"
+                                                        alt="Australia" />
+                                                @elseif($country == 'canada')
+                                                    <img class="country-flag"
+                                                        src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg"
+                                                        alt="Canada" />
+                                                @endif
                                             </a>
                                         </div>
                                         <span class="price">{{ $country }}</span>

@@ -6,7 +6,8 @@
         @if (!empty($filteredcategories))
             @foreach ($filteredcategories as $category)
                 <li>
-                    <a href="#" data-href="load_prod" data-category="{{ $category }}" class="nav-link">
+                    <a href="#" data-href="load_prod" data-country="{{ $country }}"
+                        data-category="{{ $category }}" class="nav-link">
                         <span class="menu-text">{{ $category }}</span>
                     </a>
                 </li>
