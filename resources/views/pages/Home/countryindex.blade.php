@@ -206,9 +206,20 @@
                                 due to taxes or shipping costs involved in transporting the goods
                                 internationally.
                             </p>
-                            <a href="https://bit.ly/PreferredCustomer-{{ $filteredcountryiso == 'US' ? 'USA' : $filteredcountryiso }}"
-                                class="axil-btn btn-bg-primary">Become A
-                                Preferred Customer &amp; Get 5% Off*</a>
+                            @if ($filteredcountryiso == 'GB')
+                                <a href="https://bit.ly/PreferredCustomer-GBR" class="axil-btn btn-bg-primary">Become A
+                                    Preferred Customer &amp; Get 5% Off*</a>
+                            @elseif($filteredcountryiso == 'AU')
+                                <a href="https://bit.ly/PreferredCustomer-AUS" class="axil-btn btn-bg-primary">Become A
+                                    Preferred Customer &amp; Get 5% Off*</a>
+                            @elseif($filteredcountryiso == 'CA')
+                                <a href="https://bit.ly/PreferredCustomer-CAN" class="axil-btn btn-bg-primary">Become A
+                                    Preferred Customer &amp; Get 5% Off*</a>
+                            @else
+                                <a href="https://bit.ly/PreferredCustomer-USA" class="axil-btn btn-bg-primary">Become A
+                                    Preferred Customer &amp; Get 5% Off*</a>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -330,10 +341,27 @@
                                 FLP BUSINESS FAMILY, SAVE 5% INSTANTLY ON YOUR FIRST ORDER & A LOT MORE ON YOUR NEXT ORDER
 
                             </p>
-                            <a href="https://bit.ly/FBO-{{ $filteredcountryiso == 'US' ? 'USA' : $filteredcountryiso }}"
-                                class="axil-btn btn-bg-primary" style="margin: 5px 0px;">Start
-                                Your FBO Journey With
-                                2cc Value Pak Now*</a>
+                            @if ($filteredcountryiso == 'GB')
+                                <a href="https://bit.ly/FBO-GBR" class="axil-btn btn-bg-primary"
+                                    style="margin: 5px 0px;">Start
+                                    Your FBO Journey With
+                                    2cc Value Pak Now*</a>
+                            @elseif($filteredcountryiso == 'AU')
+                                <a href="https://bit.ly/FBO-AUS" class="axil-btn btn-bg-primary"
+                                    style="margin: 5px 0px;">Start
+                                    Your FBO Journey With
+                                    2cc Value Pak Now*</a>
+                            @elseif($filteredcountryiso == 'CA')
+                                <a href="https://bit.ly/FBO-CAN" class="axil-btn btn-bg-primary"
+                                    style="margin: 5px 0px;">Start
+                                    Your FBO Journey With
+                                    2cc Value Pak Now*</a>
+                            @else
+                                <a href="https://bit.ly/FBO-USA" class="axil-btn btn-bg-primary"
+                                    style="margin: 5px 0px;">Start
+                                    Your FBO Journey With
+                                    2cc Value Pak Now*</a>
+                            @endif
 
                             <p>
                                 We included a great range of products for you to use and market from our flagship Forever

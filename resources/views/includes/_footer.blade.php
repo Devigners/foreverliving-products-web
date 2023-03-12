@@ -174,6 +174,10 @@
         $(".mainmenu a[href='" + url + "']").addClass("active");
     }
 
+
+    function navbarActive(url) {
+        $(".mainmenu a[href='" + url + "']").addClass("active");
+    }
     $(function() {
         navbarActive(window.location.pathname);
     });
@@ -225,19 +229,6 @@
         $selectBox.toggleClass("open");
     });
 
-    // outside click of select-box
-    $(document).on("click", function(e) {
-        var $target = $(e.target);
-        if (!$target.closest(".select-box").length) {
-            $(".select-box").removeClass("open");
-        }
-    });
-
-    $('body').on('click', 'button[href]', function() {
-        var $this = $(this);
-        var href = $this.attr('href');
-        window.location.href = href;
-    })
 
     $(function() {
         var timerBox = $(".timer-box-date");

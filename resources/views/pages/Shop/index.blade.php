@@ -62,24 +62,42 @@
                             </div>
                         </div>
                         <div class="row row-cols-xl-3 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 row--20">
-                            <div class="col mb-3">
-                                <div class="home-service-box" data-color="green">
-                                    <div class="inner">
-                                        <h5>Hurry!</h5>
-                                        <h5>Free Shipping</h5>
-                                        <h6>on US orders of 50$ or more</h6>
-                                        <img src="{{ asset('images/icons/drop-shipping.png') }}" alt="free-shipping-icon"
-                                            class="mt-4" />
+                            @foreach ($filteredoffercards as $item)
+                                @if ($item['country_links'])
+                                    <div class="col mb-3">
+                                        <div class="home-service-box"
+                                            @if ($item['type'] == 'visit-store-cards') data-color="light-blue" @elseif($item['type'] == 'join-and-save-cards') data-color="purple" @else data-color="green" @endif>
+
+                                            <div class="inner">
+                                                @if ($item['type'] == 'discount-cards')
+                                                    <h5>Visit Our<br />Online Store</h5>
+                                                    <h6>for United States</h6>
+                                                @elseif($item['type'] == 'visit-store-cards')
+                                                    <h5>Limited 12% Off</h5>
+                                                    <h6>No Joining Needed</h6>
+                                                @elseif($item['type'] == 'join-and-save-cards')
+                                                    <h5>Preferred Customer</h5>
+                                                    <h5>Gets 5% Off</h5>
+                                                    <h6>Instantly & Forever</h6>
+                                                @elseif($item['type'] == 'free-shipping-cards')
+                                                    <h5>Hurry!</h5>
+                                                    <h5>Free Shipping</h5>
+                                                    <h6>on US orders of 50$ or more</h6>
+                                                @endif
+                                                <img src="{{ asset('images/icons/drop-shipping.png') }}"
+                                                    alt="free-shipping-icon" class="mt-4" />
+                                            </div>
+                                            <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
+                                                *This offer is subject to change anytime
+                                            </p>
+                                            <a class="btn" role="button" href="{{ $item['country_links'] }}">
+                                                Get Now
+                                            </a>
+                                        </div>
                                     </div>
-                                    <p style="font-size: 12px; opacity: 0.7; margin-top: 10px">
-                                        *This offer is subject to change anytime
-                                    </p>
-                                    <a class="btn" role="button" href="">
-                                        Get Now
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col mb-3 campaign-data">
+                                @endif
+                            @endforeach
+                            {{-- <div class="col mb-3 campaign-data">
                                 <div class="home-service-box" data-color="light-blue">
                                     <div class="inner">
                                         <h5>Limited 12% Off</h5>
@@ -127,7 +145,7 @@
                                         Check it Out
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

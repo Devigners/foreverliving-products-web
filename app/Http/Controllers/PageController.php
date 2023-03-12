@@ -13,6 +13,7 @@ use App\Models\products;
 use App\Models\States;
 use App\Models\RestAreas;
 use App\Models\Countries;
+use App\Models\OfferCards;
 use Session;
 use Str;
 use Route;
@@ -281,8 +282,28 @@ class PageController extends Controller
             // unique categories //
             $filteredcategories = array_unique($filteredcategories); 
            $statename = null;
+
+
+           // get offer cards //
+
+           $countriesoffers = Countries::getWithStatus();
+        //    dd($countries);
+           $offercards = OfferCards::get();
+           $offercards = $offercards->toArray();
+
+           $offercards = array_combine(array_column($offercards, 'type'), $offercards);
+           $filteredoffercards = [];
+           foreach ($offercards as $key => $value) {
+            if (isset($value["country_links"]) && array_key_exists($filteredcountry, $value["country_links"])) {
+                $value["country_links"] = $value["country_links"][$filteredcountry];
+                $filteredoffercards[] = $value;
+            }
+          } 
+
+        //   dd($filteredoffercards);
+            
             // go to shop page and change url //
-            return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename'));
+            return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename','offercards','filteredoffercards','filteredcountry'));
             
     }
     
