@@ -37,12 +37,37 @@
                     <div class="copyright-left">
                         <div class="col-xl-12">
                             <b class="d-block">Relating Forever Living Company:</b>
-                            <a href="https://foreverliving.com/unitedstates/en-us/forever-living-faq">Retail FAQs</a>
+                            @if (Session::get('country') == 'unitedstates')
+                                <a href="https://foreverliving.com/usa/en-us/forever-living-faq">Retail FAQs</a>
+                            @elseif(Session::get('country') == 'greatbritain')
+                                <a href="https://foreverliving.com/gbr/en-us/forever-living-faq">Retail FAQs</a>
+                            @elseif(Session::get('country') == 'canada')
+                                <a href="https://foreverliving.com/can/en-us/forever-living-faq">Retail FAQs</a>
+                            @elseif(Session::get('country') == 'australia')
+                                <a href="https://foreverliving.com/aus/en-us/forever-living-faq">Retail FAQs</a>
+                            @else
+                                <a href="https://foreverliving.com/usa/en-us/forever-living-faq">Retail FAQs</a>
+                            @endif
                         </div>
                         <div class="col-xl-12">
-                            <a href="https://foreverliving.com/unitedstates/en-us/business-opportunity-faq">Business
-                                Opportunity FAQs</a>
+                            @if (Session::get('country') == 'unitedstates')
+                                <a href="https://foreverliving.com/usa/en-us/business-opportunity-faq">Business
+                                    Opportunity FAQs</a>
+                            @elseif(Session::get('country') == 'greatbritain')
+                                <a href="https://foreverliving.com/gbr/en-us/business-opportunity-faq">Business
+                                    Opportunity FAQs</a>
+                            @elseif(Session::get('country') == 'canada')
+                                <a href="https://foreverliving.com/can/en-us/business-opportunity-faq">Business
+                                    Opportunity FAQs</a>
+                            @elseif(Session::get('country') == 'australia')
+                                <a href="https://foreverliving.com/aus/en-us/business-opportunity-faq">Business
+                                    Opportunity FAQs</a>
+                            @else
+                                <a href="https://foreverliving.com/usa/en-us/business-opportunity-faq">Business
+                                    Opportunity FAQs</a>
+                            @endif
                         </div>
+
                         <!-- <div class="col-xl-12">
        <a href="https://joinnow.foreverliving.com/income-disclosure"
         >Income Disclosure Statement</a
@@ -139,11 +164,11 @@
     // load the products for the category //
     $(document).on('click', '[data-href="load_prod"]', function(e) {
         e.preventDefault();
+        var country = $(this).attr('data-country')
         var category = $(this).attr('data-category');
-
-        var url = "{{ route('page-loadproducts', 'unitedstates') }}";
+        var url = "{{ route('page-loadproducts') }}";
         $.ajax({
-            url: url + '/' + category,
+            url: url + '/' + country + '/' + category,
             type: 'GET',
             success: function(data) {
                 $('#dyn_prod').html('');

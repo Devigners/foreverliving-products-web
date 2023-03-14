@@ -402,16 +402,18 @@
         </div>
         <section class="section-gap">
             <div class="container">
-                <div class="product-detail-section">
+                @if ($getstated)
+                    <div class="product-detail-section">
 
-                    <h4>Delivering Across United States</h4>
-                    @foreach ($getstated as $item)
-                        <a
-                            href="{{ route('page-home', ['country' => strtolower(str_replace(' ', '', 'unitedstates')), 'restArea' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
-                        </a>
-                    @endforeach
+                        <h4>Delivering Across United States</h4>
+                        @foreach ($getstated as $item)
+                            <a
+                                href="{{ route('page-home', ['country' => strtolower(str_replace(' ', '', 'unitedstates')), 'restArea' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
+                            </a>
+                        @endforeach
 
-                </div>
+                    </div>
+                @endif
             </div>
         </section>
         <section class="section-gap">

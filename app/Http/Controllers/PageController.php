@@ -234,8 +234,8 @@ class PageController extends Controller
         
     }
 
-    // shop
-    public function shop(Request $request, $country, $restArea = null)
+    // shop //
+    public function shop(Request $request, $country, $restArea = null, $extra = null)
     {
         $this->generateSeoData([
             'title' => 'Shop',
@@ -243,6 +243,7 @@ class PageController extends Controller
         ]);
 
         
+
         $country = strtolower(str_replace(' ','',$country));
         
         Session()->put('country', $country);
@@ -309,7 +310,6 @@ class PageController extends Controller
     
     public function loadMoreProducts($country,$category)
     {
-        
         $filteredcountry = '';
         $countries = Countries::get();
         foreach ($countries as $key => $value) {
@@ -319,6 +319,7 @@ class PageController extends Controller
                 $filteredcountry = $value->iso_name;
             }
         }
+
 
         $products = products::select('id','title','slug','category','price','quantity','image_link','short_description','affiliate_link')->where('status', 'Active')->where('country', $filteredcountry)->get();
 

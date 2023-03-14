@@ -159,7 +159,8 @@
                                     <a href="{{ route('page-home') }}">Home</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('page-shop', 'unitedstates') }}">Shop</a>
+                                    <a
+                                        href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename]) }}">Shop</a>
                                 </li>
                                 <li>
                                     <a
