@@ -453,4 +453,5 @@ class PageController extends Controller
 
         return view('pages.Products.detail', compact('products','country','statename'));
     }
+
 }

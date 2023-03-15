@@ -122,10 +122,9 @@
         <div class="card-header">
             <form action="#">
                 <div class="input-group">
-                    <input type="search" class="form-control" name="prod-search" id="prod-search"
-                        placeholder="Search your product here" />
+                    <input type="search" class="form-control" name="prod-search" data-country="{{ $country }}"
+                        id="prod-search" placeholder="Search your product here" />
                     <button type="submit" class="axil-btn btn-bg-primary">
-                        f
                         <i class="far fa-search"></i>
                     </button>
                 </div>
@@ -159,6 +158,34 @@
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
 
+<script>
+    // ajax request to get products //
+    $(document).on('keyup', '#prod-search', function(e) {
+        e.preventDefault();
+        var country = $(this).attr('data-country');
+        var search = $(this).val();
+        if (search == '') {
+            $(".search-result-header").html("");
+            $('#total-result-found').html('Result Found');
+            $('.psearch-results').html('');
+            $('.psearch-results').html('<div class="text-center">No product found!!</div>');
+            return false;
+        }
+        var url = "{{ route('searchproducts') }}";
+        $.ajax({
+            url: url + '/' + country + "/" + search,
+            type: 'GET',
+            success: function(data) {
+                $('#total-result-found').html('Result Found');
+                $('.psearch-results').html('');
+                $('.psearch-results').html(data);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
 
 <script>
     // load the products for the category //

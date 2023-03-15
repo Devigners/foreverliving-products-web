@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::get('/searchproducts/{country?}/{name?}', [SearchController::class, "searchProductsdyn"])->name('searchproducts');
 
 Route::group(['as' => 'page-'], function () {
     $pages = '(?!shop|joinnow|blogs|blog-details|product|loadproducts)[a-zA-Z]+';
@@ -50,6 +52,6 @@ Route::group(['as' => 'page-'], function () {
     // Product Details
     Route::get('/{country}/{restArea?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail')->where($where);
     Route::get('/{country}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail');
-});
 
+});
 Route::get('/{country?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');
