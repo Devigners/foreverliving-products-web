@@ -30,7 +30,8 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/{country?}/{restArea?}/{extra?}', [PageController::class, "index"])->name('home')->where($where);
 
     // Shop
-    Route::get('/{country}/{restArea?}/shop',[PageController::class, "shop"])->name('shop')->where($where);
+    Route::get('/{country}/{restArea?}/{extra?}/shop',[PageController::class, "shop"])->name('shop')->where($where);
+    
     
 
     // Load More Products based on category //
@@ -39,11 +40,11 @@ Route::group(['as' => 'page-'], function () {
 
     // Join Now
     Route::get('/{country}/{restArea?}/joinnow', [PageController::class, "joinNow"])->name('join-now')->where($where);
-    Route::get('/{country}/joinnow', [PageController::class, "joinNow"])->name('join-now');
+    // Route::get('/{country}/joinnow', [PageController::class, "joinNow"])->name('join-now');
 
     // Blogs
     Route::get('/{country}/{restArea?}/blogs', [PageController::class, "blogs"])->name('blogs')->where($where);
-    Route::get('/{country}/blogs', [PageController::class, "blogs"])->name('blogs');
+    // Route::get('/{country}/blogs', [PageController::class, "blogs"])->name('blogs');
 
     // Blog Details
     Route::get('/{country}/{restArea?}/blog-details/{id}', [PageController::class, "blogsDetail"])->name('blogs-detail')->where($where);
@@ -54,4 +55,4 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/{country}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail');
 
 });
-Route::get('/{country?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');
+Route::get('/{country}/{restArea?}/{extra?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');

@@ -62,8 +62,8 @@ class PageController extends Controller
                 $value->category = $value->category[0];
             }
             $statename = null;
-            
-            return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename'));
+            $drestareagetid2 = null;
+            return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
            
         }
         elseif($countparameters == 2){
@@ -118,8 +118,8 @@ class PageController extends Controller
             $aftersixrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
            
-            
-            return view('pages.Home.countrystateindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist'));
+            $drestareagetid2 = null;
+            return view('pages.Home.countrystateindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid2'));
         }
         elseif($countparameters == 3){
             $filteredcountry = '';
@@ -162,7 +162,9 @@ class PageController extends Controller
 
             $drestareagetid = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->where('id',$filtereddynrestarae)->get()->first();
-            
+           
+            $drestareagetid2 = RestAreas::select('name')->where('country_id', $countryid)
+            ->where('state_id',$filteredstate)->where('id',$filtereddynrestarae)->pluck('name')->first();
             
             $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($iso_name))
             ->get();
@@ -187,7 +189,7 @@ class PageController extends Controller
             ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
            
             
-                return view('pages.Home.countrystateextraindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid'));
+                return view('pages.Home.countrystateextraindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid','drestareagetid2'));
         }
        
         else
@@ -227,22 +229,23 @@ class PageController extends Controller
             }
 
             $statename = null;
-            
-            return view('pages.Home.index', compact('getstated', 'filteredcountryname','filteredcountryiso','country','getproductslist','statename'));
+            $drestareagetid2 = null;
+            return view('pages.Home.index', compact('getstated', 'filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
         }      
         
         
     }
 
     // shop //
-    public function shop(Request $request, $country, $restArea = null, $extra = null)
+    public function shop(Request $request, $country, $restArea=null, $extra=null)
     {
         $this->generateSeoData([
             'title' => 'Shop',
             'description' => 'Shop',
         ]);
 
-        
+        $drestareagetid2 = RestAreas::select('id','name')->where('name',str_replace('-',' ',$extra))->pluck('name')->first();
+       
 
         $country = strtolower(str_replace(' ','',$country));
         
@@ -282,8 +285,8 @@ class PageController extends Controller
         
             // unique categories //
             $filteredcategories = array_unique($filteredcategories); 
-           $statename = null;
-
+           $statename = $restArea;
+        
 
            // get offer cards //
 
@@ -304,7 +307,7 @@ class PageController extends Controller
         //   dd($filteredoffercards);
             
             // go to shop page and change url //
-            return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename','offercards','filteredoffercards','filteredcountry'));
+            return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename','offercards','filteredoffercards','filteredcountry','drestareagetid2'));
             
     }
     
@@ -405,13 +408,14 @@ class PageController extends Controller
     }
 
     // product detail
-    public function productDetail(Request $request, $country, $category, $name)
+    public function productDetail(Request $request, $country,$restArea=null,$extra=null, $category, $name)
     {
         $this->generateSeoData([
             'title' => 'Product Detail',
             'description' => 'Product Detail',
         ]); 
 
+     
 
         $filteredcountry = '';
         $countries = Countries::get();
@@ -449,9 +453,10 @@ class PageController extends Controller
 
         $products->total_rating = $total_rating;
 
-        $statename = null;
+        $statename = $restArea;
+        $drestareagetid2 = $extra;
 
-        return view('pages.Products.detail', compact('products','country','statename'));
+        return view('pages.Products.detail', compact('products','country','statename','drestareagetid2'));
     }
 
 }

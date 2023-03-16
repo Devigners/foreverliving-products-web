@@ -165,7 +165,13 @@
                             <div class="axil-product product-style-one has-color-pick mt--40">
                                 <div class="thumbnail">
                                     <a
-                                        href="{{ route('product', ['country' => Session::get('country'), 'state' => request()->get('state'), 'category' => str_replace(' ', '-', $item->singlecategory), 'name' => $item->slug]) }}">
+                                        href="{{ route('product', [
+                                            'country' => Session::get('country'),
+                                            'restArea' => $statename,
+                                            'extra' => $drestareagetid2,
+                                            'category' => str_replace(' ', '-', $item->singlecategory),
+                                            'name' => $item->slug,
+                                        ]) }}">
                                         <img src="{{ $item->image_link }}" alt="{{ $item->title }}">
                                     </a>
                                     <div class="product-hover-action">

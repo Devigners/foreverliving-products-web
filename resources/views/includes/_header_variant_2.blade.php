@@ -84,7 +84,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename]) }}">Shop</a>
+                                    href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Shop</a>
                             </li>
                             <li>
                                 <a
