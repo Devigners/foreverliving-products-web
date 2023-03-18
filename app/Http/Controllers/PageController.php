@@ -61,8 +61,8 @@ class PageController extends Controller
                 $value->category = explode(',',$value->category);
                 $value->category = $value->category[0];
             }
-            $statename = null;
-            $drestareagetid2 = null;
+            $statename = $restArea;
+            $drestareagetid2 = $extra;
             return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
            
         }
@@ -347,18 +347,20 @@ class PageController extends Controller
     }
 
     // join now
-    public function joinNow(Request $request, $country, $restArea = null)
+    public function joinNow(Request $request, $country, $restArea = null, $extra = null)
     {
         $this->generateSeoData([
             'title' => 'Join Now',
             'description' => 'Join Now',
         ]);
         $statename = null;
-        return view('pages.JoinNow.index', compact('country','statename'));
+        $drestareagetid2 = $extra;
+
+        return view('pages.JoinNow.index', compact('country','statename','drestareagetid2'));
     }
 
     // blogs
-    public function blogs(Request $request, $country, $restArea = null)
+    public function blogs(Request $request, $country, $restArea = null, $extra=null)
     {
         $this->generateSeoData([
             'title' => 'Blogs',
@@ -380,8 +382,9 @@ class PageController extends Controller
         $pageCat = array_unique($pageCat);
 
         $pageCat = array_diff($pageCat, ['Uncategorized']);
-        $statename = null;
-        return view('pages.Blogs.index', compact('data', 'pageCat', 'country','statename'));
+        $statename = $restArea;
+        $drestareagetid2 = $extra;
+        return view('pages.Blogs.index', compact('data', 'pageCat', 'country','statename','drestareagetid2'));
     }
 
     // blogs detail

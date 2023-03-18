@@ -88,12 +88,12 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename]) }}">Join
+                                    href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Join
                                     Now</a>
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename]) }}">Blogs</a>
+                                    href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Blogs</a>
                             </li>
                         </ul>
                         @mobile

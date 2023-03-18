@@ -517,7 +517,7 @@
                 <div class="product-detail-section">
                     <h4>Products Line In {{ $filteredcountryiso }}</h4>
                     @foreach ($getproductslist as $item)
-                        <a href="{{ route('product', ['country' => $country, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
+                        <a href="{{ route('product', ['country' => $country, 'restArea' => $statename, 'extra' => $drestareagetid2, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
                             style="text-transform:capitalize">{{ str_replace('-', ' ', $item->slug) }}<span>,
                             </span>
                         </a>
