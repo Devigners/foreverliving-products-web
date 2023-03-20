@@ -25,21 +25,21 @@ class PageController extends Controller
 
     public function index(Request $request, $country, $restArea = null, $extra=null)
     {
-        
+
         $this->generateSeoData([
             'title' => 'Home',
             'description' => 'Home',
         ]);
-        
+
         Session()->put('country', $country);
-     
+
         $currentRoute = Route::currentRouteName();
         $parameters = Route::current()->parameters();
-       
+
         $countparameters = count($parameters);
-        
+
         if($countparameters == 1){
-           
+
             $filteredcountry = '';
             $filteredcountryname = '';
             $filteredcountryiso = '';
@@ -52,7 +52,7 @@ class PageController extends Controller
                     $filteredcountryiso = $value->iso_name;
                 }
             }
-            
+
             $getstated = States::select('id','name')->where('country_id', $filteredcountry)->get();
             $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($filteredcountryiso))->get();
 
@@ -64,7 +64,7 @@ class PageController extends Controller
             $statename = $restArea;
             $drestareagetid2 = $extra;
             return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
-           
+
         }
         elseif($countparameters == 2){
             $filteredcountry = '';
@@ -80,7 +80,7 @@ class PageController extends Controller
                 }
             }
 
-           
+
 
             $filteredstate = '';
             $stateflag = '';
@@ -94,8 +94,8 @@ class PageController extends Controller
                     $stateflag = $value->image_url;
                 }
             }
-            
-            
+
+
             $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($iso_name))
             ->get();
 
@@ -107,17 +107,17 @@ class PageController extends Controller
 
             $getrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->get();
-            
+
 
             $firstfiverestareas = RestAreas::select('name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->limit(5)->get()->all();
 
             $sixthrestarea = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->offset(5)->limit(1)->pluck('name')->first();
-           
+
             $aftersixrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
-           
+
             $drestareagetid2 = null;
             return view('pages.Home.countrystateindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid2'));
         }
@@ -135,7 +135,7 @@ class PageController extends Controller
                 }
             }
 
-        
+
             $filteredstate = '';
             $stateflag = '';
             $statename = '';
@@ -150,7 +150,7 @@ class PageController extends Controller
             }
 
             $requestedrestarea = $parameters['extra'];
-            
+
             $filtereddynrestarae = '';
             $getdynrestarea = RestAreas::get();
             foreach ($getdynrestarea as $key => $value) {
@@ -158,14 +158,14 @@ class PageController extends Controller
                 if($value->radynname == $parameters['extra']){
                     $filtereddynrestarae = $value->id;
                 }
-            } 
+            }
 
             $drestareagetid = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->where('id',$filtereddynrestarae)->get()->first();
-           
+
             $drestareagetid2 = RestAreas::select('name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->where('id',$filtereddynrestarae)->pluck('name')->first();
-            
+
             $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($iso_name))
             ->get();
 
@@ -177,21 +177,21 @@ class PageController extends Controller
 
             $getrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->get();
-            
+
 
             $firstfiverestareas = RestAreas::select('name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->limit(5)->get()->all();
 
             $sixthrestarea = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->offset(5)->limit(1)->pluck('name')->first();
-           
+
             $aftersixrestareas = RestAreas::select('id','name')->where('country_id', $countryid)
             ->where('state_id',$filteredstate)->offset(6)->limit(4)->get();
-           
-            
+
+
                 return view('pages.Home.countrystateextraindex', compact('getrestareas','firstfiverestareas','sixthrestarea','aftersixrestareas', 'filteredcountry', 'iso_name','stateflag','statename','country','getproductslist','drestareagetid','drestareagetid2'));
         }
-       
+
         else
         {
             $country = 'unitedstates';
@@ -217,8 +217,8 @@ class PageController extends Controller
                     $filteredcountryiso = $value->iso_name;
                 }
             }
-            
-            
+
+
             $getstated = States::select('id','name')->where('country_id', $filteredcountry)->get();
             $getproductslist = products::select('id','title','slug','country','category')->where('country', strtolower($filteredcountryiso))->get();
 
@@ -231,9 +231,9 @@ class PageController extends Controller
             $statename = null;
             $drestareagetid2 = null;
             return view('pages.Home.index', compact('getstated', 'filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
-        }      
-        
-        
+        }
+
+
     }
 
     // shop //
@@ -245,10 +245,10 @@ class PageController extends Controller
         ]);
 
         $drestareagetid2 = RestAreas::select('id','name')->where('name',str_replace('-',' ',$extra))->pluck('name')->first();
-       
+
 
         $country = strtolower(str_replace(' ','',$country));
-        
+
         Session()->put('country', $country);
 
         $filteredcountry = '';
@@ -260,33 +260,33 @@ class PageController extends Controller
                 $filteredcountry = $value->iso_name;
             }
         }
-        
+
         // get first 3 products //
         $firstthreeproducts = products::select('id','title','slug','category','price','quantity','image_link','short_description','affiliate_link')->where('status', 'Active')->where('country', $filteredcountry)->limit(3)->get();
-        
+
         // get products //
         $products = products::select('id','title','category','slug','price','quantity','image_link','short_description','affiliate_link')->where('status', 'Active')->where('country', $filteredcountry)->get();
-        
+
         foreach ($products as $key => $value) {
             foreach (explode(',', $value->category) as $cat) {
                 $value->singlecategory = $cat;
             }
         }
-        
+
         // get unique categories from products and explode them //
         $categories = products::select('category')->where('status', 'Active')->where('country', $filteredcountry)->groupBy('category')->get();
-        
+
         $filteredcategories = [];
         foreach ($categories as $key => $value) {
             foreach (explode(',', $value->category) as $cat) {
                 $filteredcategories[] = $cat;
             }
         }
-        
+
             // unique categories //
-            $filteredcategories = array_unique($filteredcategories); 
+            $filteredcategories = array_unique($filteredcategories);
            $statename = $restArea;
-        
+
 
            // get offer cards //
 
@@ -302,15 +302,15 @@ class PageController extends Controller
                 $value["country_links"] = $value["country_links"][$filteredcountry];
                 $filteredoffercards[] = $value;
             }
-          } 
+          }
 
         //   dd($filteredoffercards);
-            
+
             // go to shop page and change url //
             return view('pages.Shop.index', compact('firstthreeproducts','filteredcategories','products','country','statename','offercards','filteredoffercards','filteredcountry','drestareagetid2'));
-            
+
     }
-    
+
     public function loadMoreProducts($country,$category)
     {
         $filteredcountry = '';
@@ -327,7 +327,7 @@ class PageController extends Controller
         $products = products::select('id','title','slug','category','price','quantity','image_link','short_description','affiliate_link')->where('status', 'Active')->where('country', $filteredcountry)->get();
 
         $filteredproducts = [];
-        
+
         $limit = 3;
         $count = 0;
         foreach ($products as $key => $value) {
@@ -416,9 +416,9 @@ class PageController extends Controller
         $this->generateSeoData([
             'title' => 'Product Detail',
             'description' => 'Product Detail',
-        ]); 
+        ]);
 
-     
+
 
         $filteredcountry = '';
         $countries = Countries::get();
@@ -441,16 +441,16 @@ class PageController extends Controller
         ->where('country', $filteredcountry)
         ->limit(4)->get();
         $similarproducts->category = explode(',', $products->category);
-        $products->category = explode(',', $products->category);        
+        $products->category = explode(',', $products->category);
 
         $products->similarproducts = $similarproducts;
         // remove array from tags //
         $products->tags = explode(',', str_replace([':', '\\', '/', '*','"',"[","]"],"",$products->tags));
         // remove extra array from tags only take string from tags //
-        
+
         // generate review //
         $total_rating = [];
-        for ($i=0; $i < $products->total_rating; $i++) { 
+        for ($i=0; $i < $products->total_rating; $i++) {
             $total_rating[] = $i;
         }
 

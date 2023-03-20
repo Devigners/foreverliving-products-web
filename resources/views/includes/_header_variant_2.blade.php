@@ -84,16 +84,16 @@
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Shop</a>
+                                    href="{{ route('page-shop', ['country' => $country, 'restArea' => $statename]) }}">Shop</a>
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Join
+                                    href="{{ route('page-join-now', ['country' => $country, 'restArea' => $statename]) }}">Join
                                     Now</a>
                             </li>
                             <li>
                                 <a
-                                    href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename, 'extra' => str_replace(' ', '-', $drestareagetid2)]) }}">Blogs</a>
+                                    href="{{ route('page-blogs', ['country' => $country, 'restArea' => $statename]) }}">Blogs</a>
                             </li>
                         </ul>
                         @mobile

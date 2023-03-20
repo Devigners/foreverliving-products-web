@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/searchproducts/{country?}/{name?}', [SearchController::class, "searchProductsdyn"])->name('searchproducts');
 
 Route::group(['as' => 'page-'], function () {
-    $pages = '(?!shop|joinnow|blogs|blog-details|product|loadproducts)[a-zA-Z]+';
+    $pages = '(?!shop|joinnow|blogs|blog-details|product|loadproducts)[a-zA-Z-]+';
     $where = [
         'country' => $pages,
         'restArea' => $pages,
@@ -29,18 +29,18 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/{country?}/{restArea?}/{extra?}', [PageController::class, "index"])->name('home')->where($where);
 
     // Shop
-    Route::get('/{country}/{restArea?}/{extra?}/shop',[PageController::class, "shop"])->name('shop')->where($where);
-    
+    Route::get('/shop/{country}/{restArea?}', [PageController::class, "shop"])->name('shop')->where($where);
+
     // Load More Products based on category //
 
     Route::get('loadproducts/{country?}/{category?}', [PageController::class, "loadMoreProducts"])->name('loadproducts');
 
     // Join Now
-    Route::get('/{country}/{restArea?}/{extra?}/joinnow', [PageController::class, "joinNow"])->name('join-now')->where($where);
+    Route::get('joinnow/{country}/{restArea?}', [PageController::class, "joinNow"])->name('join-now')->where($where);
     // Route::get('/{country}/joinnow', [PageController::class, "joinNow"])->name('join-now');
 
     // Blogs
-    Route::get('/{country}/{restArea?}/{extra?}/blogs', [PageController::class, "blogs"])->name('blogs')->where($where);
+    Route::get('blogs/{country}/{restArea?}', [PageController::class, "blogs"])->name('blogs')->where($where);
     // Route::get('/{country}/blogs', [PageController::class, "blogs"])->name('blogs');
 
     // Blog Details
