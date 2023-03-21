@@ -22,11 +22,10 @@ Route::group(['as' => 'page-'], function () {
     $where = [
         'country' => $pages,
         'restArea' => $pages,
-        'extra' => $pages,
     ];
 
     // Home
-    Route::get('/{country?}/{restArea?}/{extra?}', [PageController::class, "index"])->name('home')->where($where);
+    Route::get('/{country?}/{restArea?}', [PageController::class, "index"])->name('home')->where($where);
 
     // Shop
     Route::get('/shop/{country}/{restArea?}', [PageController::class, "shop"])->name('shop')->where($where);
@@ -47,9 +46,8 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/{country}/{restArea?}/blog-details/{id}', [PageController::class, "blogsDetail"])->name('blogs-detail')->where($where);
     Route::get('/{country}/blog-details/{id}', [PageController::class, "blogsDetail"])->name('blogs-detail');
 
-    // Product Details
-    Route::get('/{country}/{restArea?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail')->where($where);
-    Route::get('/{country}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product-detail');
+
 
 });
-Route::get('/{country}/{restArea?}/{extra?}/product/{category}/{name}', [PageController::class, "productDetail"])->name('product');
+
+Route::get('product/{country}/{restArea?}/{category?}/{name?}', [PageController::class, "productDetail"])->name('product'); 

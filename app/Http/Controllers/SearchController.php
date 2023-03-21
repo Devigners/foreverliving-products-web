@@ -57,5 +57,4 @@ class SearchController extends Controller
         return view('pages.filteredproducts.searchproducts', compact('products','country'));
 
     }
-
 }

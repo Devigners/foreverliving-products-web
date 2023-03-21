@@ -166,9 +166,8 @@
                                 <div class="thumbnail">
                                     <a
                                         href="{{ route('product', [
-                                            'country' => Session::get('country'),
+                                            'country' => $country,
                                             'restArea' => $statename,
-                                            'extra' => $drestareagetid2,
                                             'category' => str_replace(' ', '-', $item->singlecategory),
                                             'name' => $item->slug,
                                         ]) }}">
@@ -181,7 +180,7 @@
                                             </li>
                                             <li class="select-option">
                                                 <a class="btn-default"
-                                                    href="{{ route('product', ['country' => Session::get('country'), 'category' => str_replace(' ', '-', $item->singlecategory), 'name' => $item->slug]) }}">See
+                                                    href="{{ route('product', ['country' => $country, 'restArea' => $statename, 'category' => str_replace(' ', '-', $item->singlecategory), 'name' => $item->slug]) }}">See
                                                     Details</a>
                                             </li>
                                         </ul>

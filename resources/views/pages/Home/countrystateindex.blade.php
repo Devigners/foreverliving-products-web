@@ -474,7 +474,7 @@
                         <h4>Delivering Across {{ $statename }}</h4>
                         @foreach ($getrestareas as $item)
                             <a
-                                href="{{ route('page-home', ['country' => $country, 'restArea' => str_replace(' ', '', $statename), 'extra' => str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
+                                href="{{ route('page-home', ['country' => $country, 'restArea' => str_replace(' ', '', $statename) . '-' . str_replace(' ', '', $item->name)]) }}">{{ $item->name }},
                             </a>
                         @endforeach
                     </div>
@@ -487,7 +487,7 @@
                 <div class="product-detail-section">
                     <h4>Products Line In {{ $iso_name }}</h4>
                     @foreach ($getproductslist as $item)
-                        <a href="{{ route('product', ['country' => $country, 'restArea' => $statename, 'extra' => $drestareagetid2, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
+                        <a href="{{ route('product', ['country' => $country, 'restArea' => $statename, 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}"
                             style="text-transform:capitalize">{{ str_replace('-', ' ', $item->slug) }}<span>,
                             </span>
                         </a>
