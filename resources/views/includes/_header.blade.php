@@ -56,11 +56,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-sm-3 col-3">
                         <div class="header-brand">
-                            <a href="{{ route('page-home') }}" class="nav-title">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="nav-title">
                                 <img src="{{ asset('images/logo.png') }}" alt="mainmenu-navbar-logo" width="60"
                                     height="60" />
                             </a>
-                            <a href="" class="logo logo-light">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="logo logo-light">
                                 <img src="{{ asset('images/logo.png') }}" alt="mainmenu-navbar-logo-2" width="60"
                                     height="60" />
                             </a>
@@ -98,11 +100,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-sm-3 col-3">
                         <div class="header-brand">
-                            <a href="{{ route('page-home') }}" class="nav-title">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="nav-title">
                                 <img src="{{ asset('images/logo.png') }}" alt="mainmenu-navbar-logo" width="60"
                                     height="60" />
                             </a>
-                            <a href="" class="logo logo-light">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="logo logo-light">
                                 <img src="{{ asset('images/logo.png') }}" alt="mainmenu-navbar-logo-2" width="60"
                                     height="60" />
                             </a>
@@ -148,7 +152,8 @@
                             <i class="fas fa-times"></i>
                         </button>
                         <div class="mobile-nav-brand">
-                            <a href="{{ route('page-home') }}" class="logo">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="logo">
                                 <img src="{{ asset('images/logo.png') }}" alt="mobile-mainmenu-navbar-logo"
                                     width="60" height="60" />
                             </a>
@@ -156,7 +161,8 @@
                         <div class="d-flex w-100 justify-content-between align-items-center mobile-nav-body">
                             <ul class="mainmenu">
                                 <li>
-                                    <a href="{{ route('page-home') }}">Home</a>
+                                    <a
+                                        href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}">Home</a>
                                 </li>
                                 <li>
                                     <a

@@ -61,7 +61,8 @@
         <div class="container">
             <div class="header-navbar">
                 <div class="header-brand pb-0" style="padding-bottom: 0 !important">
-                    <a href="{{ route('page-home') }}" class="nav-title">
+                    <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                        class="nav-title">
                         <img src="{{ asset('images/logo.png') }}" alt="sticky-navbar-logo" width="60"
                             height="60" />
                     </a>
@@ -73,14 +74,16 @@
                             <i class="fas fa-times"></i>
                         </button>
                         <div class="mobile-nav-brand">
-                            <a href="{{ route('page-home') }}" class="nav-title">
+                            <a href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}"
+                                class="nav-title">
                                 <img src="{{ asset('images/logo.png') }}" alt="mainmenu-navbar-logo" width="80"
                                     height="80" />
                             </a>
                         </div>
                         <ul class="mainmenu justify-content-start">
                             <li>
-                                <a href="{{ route('page-home') }}">Home</a>
+                                <a
+                                    href="{{ route('page-home', ['country' => $country, 'restArea' => $statename]) }}">Home</a>
                             </li>
                             <li>
                                 <a

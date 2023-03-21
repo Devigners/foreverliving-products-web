@@ -62,7 +62,7 @@ class PageController extends Controller
                 $value->category = $value->category[0];
             }
             $statename = $restArea;
-            $drestareagetid2 = $extra;
+            $drestareagetid2 = null;
             return view('pages.Home.countryindex', compact('getstated','filteredcountryname','filteredcountryiso','country','getproductslist','statename','drestareagetid2'));
 
         }
