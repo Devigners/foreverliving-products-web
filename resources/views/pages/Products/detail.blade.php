@@ -159,7 +159,12 @@
                                             </li>
                                             <li class="select-option">
                                                 <a class="btn-default"
-                                                    href="{{ route('product', ['country' => Session::get('country'), 'category' => str_replace(' ', '-', $item->category), 'name' => $item->slug]) }}">See
+                                                    href="{{ route('product', [
+                                                        'country' => $country,
+                                                        'restArea' => $statename,
+                                                        'category' => str_replace(' ', '-', $category),
+                                                        'name' => $item->slug,
+                                                    ]) }}">See
                                                     Details</a>
                                             </li>
                                         </ul>

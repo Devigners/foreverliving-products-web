@@ -171,7 +171,6 @@ class PageController extends Controller
             ->get();
 
             foreach($getproductslist as $key => $value){
-                // filter cateogry and get first category //
                 $value->category = explode(',',$value->category);
                 $value->category = $value->category[0];
             }
@@ -411,10 +410,16 @@ class PageController extends Controller
     }
 
     // product detail
-    public function productDetail(Request $request, $country=null, $restArea=null, $category=null, $name=null)
+    public function productDetail(Request $request, $country,$restArea=null, $category, $name)
     {
-        // dd($country,$restArea,$category,$name);
-
+        
+        if (is_null($restArea)) {
+            // Assign category to restArea
+            $restArea = $category;
+            // Set category to null
+            $category = null;
+        }
+        
         $this->generateSeoData([
             'title' => 'Product Detail',
             'description' => 'Product Detail',
@@ -459,8 +464,9 @@ class PageController extends Controller
 
         $statename = $restArea;
         $drestareagetid2 = null;
+        $category = $category;
 
-        return view('pages.Products.detail', compact('products','country','statename','drestareagetid2'));
+        return view('pages.Products.detail', compact('products','country','category','statename','drestareagetid2'));
     }
 
 }
