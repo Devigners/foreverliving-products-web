@@ -4,7 +4,6 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +30,6 @@ Route::group(['as' => 'page-'], function () {
     Route::get('/shop/{country}/{restArea?}', [PageController::class, "shop"])->name('shop')->where($where);
 
     // Load More Products based on category //
-
     Route::get('loadproducts/{country?}/{category?}', [PageController::class, "loadMoreProducts"])->name('loadproducts');
 
     // Join Now
@@ -45,6 +43,8 @@ Route::group(['as' => 'page-'], function () {
     // Blog Details
     Route::get('/{country}/{restArea?}/blog-details/{id}', [PageController::class, "blogsDetail"])->name('blogs-detail')->where($where);
     Route::get('/{country}/blog-details/{id}', [PageController::class, "blogsDetail"])->name('blogs-detail');
-}); 
+});
 
+// Product Detail Page
+Route::get('product/{country}/{category}/{name}', [PageController::class, "productDetail"])->name('product');
 Route::get('product/{country}/{restArea?}/{category}/{name}', [PageController::class, "productDetail"])->name('product');
